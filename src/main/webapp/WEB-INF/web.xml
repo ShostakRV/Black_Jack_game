@@ -19,15 +19,15 @@
         <!--<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>-->
     <!--</listener>-->
 
-    <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
-    </welcome-file-list>
+    <!--<welcome-file-list>-->
+        <!--<welcome-file>index.jsp</welcome-file>-->
+    <!--</welcome-file-list>-->
 
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>
-            classpath:/applicationContext.xml
-        </param-value>
-    </context-param>
+    <!--<context-param>-->
+        <!--<param-name>contextConfigLocation</param-name>-->
+        <!--<param-value>-->
+            <!--classpath:/applicationContext.xml-->
+        <!--</param-value>-->
+    <!--</context-param>-->
 
 </web-app>
