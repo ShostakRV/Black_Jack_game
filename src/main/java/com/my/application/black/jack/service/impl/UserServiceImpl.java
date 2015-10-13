@@ -1,8 +1,9 @@
-package com.my.application.black.jack.service;
+package com.my.application.black.jack.service.impl;
 
 
 import com.my.application.black.jack.dao.UserRepository;
 import com.my.application.black.jack.model.User;
+import com.my.application.black.jack.service.UserService;
 import com.my.application.black.jack.service.exception.UserAlreadyExistsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @Service
 @Validated
+@Transactional
 public class UserServiceImpl implements UserService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);

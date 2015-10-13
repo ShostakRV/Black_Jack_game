@@ -26,7 +26,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/user", method = RequestMethod.POST)
+    @RequestMapping(value = "/userGG", method = RequestMethod.POST)
     public User createUser(@RequestBody @Valid final User user) {
         LOGGER.debug("Received request to create the {}", user);
         return userService.save(user);
@@ -36,7 +36,7 @@ public class UserController {
     @RequestMapping(value = "/testUser", method = RequestMethod.POST)
     public User testUser() {
         User u = new User();
-        u.setName("hello");
+        u.setEmail("hello@ggg.com");
         return u;
     }
 }

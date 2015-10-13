@@ -12,28 +12,24 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name = "USER")
-public class User
-        extends AbstractEntity
-{
+public class User extends AbstractEntity {
     @NotNull
-    @Column(name = "NAME", length = 255)
-    private String name;
-    @NotNull
-    @Column(name = "EMAIL", length = 255)
+    @Column(name = "EMAIL", unique = true)
     private String email;
     @NotNull
-    @Column(name = "PASSWORD", length = 255)
+    @Column(name = "PASSWORD")
     private String password;
     @NotNull
     @Column(name = "AMOUNT")
     private BigDecimal amount;
 
-    public String getName() {
-        return name;
+    public User() {
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+        amount = BigDecimal.ZERO;
     }
 
     public String getEmail() {

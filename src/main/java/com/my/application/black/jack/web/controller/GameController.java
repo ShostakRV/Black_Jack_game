@@ -1,5 +1,6 @@
 package com.my.application.black.jack.web.controller;
 
+import com.my.application.black.jack.service.GameService;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -8,5 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class GameController {
+    private GameService gameService;
 
 }

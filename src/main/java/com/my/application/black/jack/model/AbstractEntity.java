@@ -5,7 +5,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Clock;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.UUID;
 
 /**
@@ -30,15 +29,18 @@ public abstract class AbstractEntity implements Serializable {
     @Column(name = "CREATED_ON")
     private LocalDateTime createdOn;
 
+    public AbstractEntity() {
+        syncCreatedOn();
+    }
+
     @PrePersist
     protected void prePersist() {
         syncUuidString();
-        syncCreatedOn();
     }
 
     private void syncCreatedOn() {
         if (createdOn == null) {
-            createdOn = LocalDateTime.now(Clock.systemDefaultZone());
+            createdOn = LocalDateTime.now();
         }
     }
 

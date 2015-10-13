@@ -1,6 +1,10 @@
 package com.my.application.black.jack.web.controller;
 
+import com.my.application.black.jack.service.GameService;
+import com.my.application.black.jack.service.UserService;
 import org.springframework.web.bind.annotation.*;
+
+import javax.inject.Inject;
 
 /**
  * Developer: Roman Shostak
@@ -8,10 +12,13 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 public class TestRestController {
+    private UserService userService;
+    private GameService gameService;
 
-    public TestRestController() {
-
-        System.out.print("\n\n\nTest rest controller has been created.\n\n\n");
+    @Inject
+    public TestRestController(UserService userService, GameService gameService) {
+        this.userService = userService;
+        this.gameService = gameService;
     }
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
