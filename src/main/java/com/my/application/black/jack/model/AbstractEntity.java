@@ -15,7 +15,7 @@ import java.util.UUID;
 public abstract class AbstractEntity implements Serializable {
     @Id
     @GeneratedValue
-    private Long id;
+    protected Long id;
 
     @Version
     private Long version;

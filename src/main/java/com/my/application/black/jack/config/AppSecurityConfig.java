@@ -33,8 +33,8 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private SecurityUserDetailsService securityUserDetailsService;
 
-    @Autowired
-    DataSource dataSource;
+//    @Autowired
+//    private DataSource dataSource;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -49,6 +49,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
+//                .antMatchers("/**").permitAll()
                 .antMatchers("/resources/public/**").permitAll()
                 .antMatchers("/authorization/**").permitAll()
                 .antMatchers("/resources/img/**").permitAll()
@@ -56,6 +57,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/resources/css/**").permitAll()
                 .antMatchers("/resources/bower_components/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/user").permitAll()
+//                ;
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -72,7 +74,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/authorization/login.html")
                 .permitAll();
-
+//
         if ("true".equals(System.getProperty("httpsOnly"))) {
             LOGGER.info("launching the application in HTTPS-only mode");
             http.requiresChannel().anyRequest().requiresSecure();

@@ -2,33 +2,13 @@
         "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
         "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
-<web-app xmlns="        http://java.sun.com/xml/ns/javaee"
-         xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="
-        http://java.sun.com/xml/ns/javaee
-        http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd
-         "
-         version="3.0">
-    <display-name>Black-Jack</display-name>
+<web-app>
 
-    <!-- Spring listeners -->
-    <!--<listener>-->
-    <!--<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>-->
-    <!--</listener>-->
-    <!--<listener>-->
-    <!--<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>-->
-    <!--</listener>-->
+    <display-name>Archetype Created Web Application</display-name>
 
-    <!--<welcome-file-list>-->
-    <!--<welcome-file>index.jsp</welcome-file>-->
-    <!--</welcome-file-list>-->
+    <welcome-file-list>
+        <welcome-file>/game/index.html</welcome-file>
+    </welcome-file-list>
 
-    <!--<context-param>-->
-    <!--<param-name>contextConfigLocation</param-name>-->
-    <!--<param-value>-->
-    <!--classpath:/applicationContext.xml-->
-    <!--</param-value>-->
-    <!--</context-param>-->
 
 </web-app>
