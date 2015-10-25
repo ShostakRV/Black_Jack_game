@@ -2,7 +2,11 @@ package com.my.application.black.jack.web.controller;
 
 import com.my.application.black.jack.service.GameService;
 import com.my.application.black.jack.service.UserService;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
 
@@ -23,7 +27,7 @@ public class TestRestController {
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String helloWorld() {
-        return "helloWorld ";
+        return "HelloWorld! User name: " + SecurityContextHolder.getContext().getAuthentication().getName();
     }
 
     @RequestMapping(value = "/testDto", method = RequestMethod.GET)
