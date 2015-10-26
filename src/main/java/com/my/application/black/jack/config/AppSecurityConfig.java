@@ -33,9 +33,6 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private SecurityUserDetailsService securityUserDetailsService;
 
-//    @Autowired
-//    private DataSource dataSource;
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(securityUserDetailsService).passwordEncoder(new BCryptPasswordEncoder());
@@ -44,8 +41,8 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-//        CsrfTokenResponseHeaderBindingFilter csrfTokenFilter = new CsrfTokenResponseHeaderBindingFilter();
-//        http.addFilterAfter(csrfTokenFilter, CsrfFilter.class);
+        CsrfTokenResponseHeaderBindingFilter csrfTokenFilter = new CsrfTokenResponseHeaderBindingFilter();
+        http.addFilterAfter(csrfTokenFilter, CsrfFilter.class);
 
         http
                 .authorizeRequests()
@@ -57,11 +54,10 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/resources/css/**").permitAll()
                 .antMatchers("/resources/bower_components/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/user").permitAll()
-//                ;
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .defaultSuccessUrl("/authorization/login.html")
+                .defaultSuccessUrl("/index.jsp")
                 .loginProcessingUrl("/authenticate")
                 .usernameParameter("username")
                 .passwordParameter("password")
@@ -72,7 +68,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/authorization/login.html")
+                .logoutSuccessUrl("/index.jsp")
                 .permitAll();
 //
         if ("true".equals(System.getProperty("httpsOnly"))) {
