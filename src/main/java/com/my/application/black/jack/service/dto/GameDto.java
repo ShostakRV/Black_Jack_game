@@ -17,7 +17,7 @@ public class GameDto {
 
     private String croupierCard1;
 
-    private String croupierCard2;
+
 
     public Long getId() {
         return id;
@@ -57,13 +57,5 @@ public class GameDto {
 
     public void setCroupierCard1(String croupierCard1) {
         this.croupierCard1 = croupierCard1;
-    }
-
-    public String getCroupierCard2() {
-        return croupierCard2;
-    }
-
-    public void setCroupierCard2(String croupierCard2) {
-        this.croupierCard2 = croupierCard2;
     }
 }

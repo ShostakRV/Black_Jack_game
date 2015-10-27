@@ -41,13 +41,13 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        CsrfTokenResponseHeaderBindingFilter csrfTokenFilter = new CsrfTokenResponseHeaderBindingFilter();
-        http.addFilterAfter(csrfTokenFilter, CsrfFilter.class);
+//        CsrfTokenResponseHeaderBindingFilter csrfTokenFilter = new CsrfTokenResponseHeaderBindingFilter();
+//        http.addFilterAfter(csrfTokenFilter, CsrfFilter./class);
 
         http
                 .authorizeRequests()
                 .antMatchers("/index.jsp").permitAll()
-//                .antMatchers("/resources/public/**").permitAll()
+//                .antMatchers("/game/**").permitAll()
                 .antMatchers("/authorization/**").permitAll()
                 .antMatchers("/resources/img/**").permitAll()
                 .antMatchers("/resources/js/**").permitAll()
