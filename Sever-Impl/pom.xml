@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>Black-Jack</artifactId>
+        <groupId>com.my.application.black.jack</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>Server-Impl</artifactId>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>com.my.application.black.jack</groupId>
+            <artifactId>model</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.my.application.black.jack</groupId>
+            <artifactId>Server-Spec</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <finalName>Server-Impl</finalName>
+        <sourceDirectory>${basedir}\src\main\java</sourceDirectory>
+        <!--<resources>${basedir}\src\main\resources</resources>-->
+
+        <testSourceDirectory>${basedir}\src\test\java</testSourceDirectory>
+        <!--<testResources>${basedir}\src\test\resources</testResources>-->
+    </build>
+
+
+</project>

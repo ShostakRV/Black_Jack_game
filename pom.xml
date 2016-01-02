@@ -1,10 +1,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>com.my.application.black.jack</groupId>
     <artifactId>Black-Jack</artifactId>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
     <version>1.0.0-SNAPSHOT</version>
+    <modules>
+        <module>model</module>
+        <module>Server-Spec</module>
+        <module>Sever-Impl</module>
+        <module>BlackJackClient</module>
+    </modules>
     <name>Black-Jack Maven WebApp</name>
 
     <parent>
@@ -14,9 +21,9 @@
     </parent>
 
 
-    <properties>
 
-        <!--<log4j.version>1.2.17</log4j.version>-->
+    <properties>
+    <!--<log4j.version>1.2.17</log4j.version>-->
         <!--<org.slf4j-version>1.6.1</org.slf4j-version>-->
         <!-- DELETE THIS SHIT -->
         <!--<derby.version>10.10.2.0</derby.version>-->
@@ -59,13 +66,6 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-        <!-- Hibernate validator -->
-
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-        </dependency>
-
         <!-- HSQLDB -->
 
         <dependency>
@@ -73,30 +73,9 @@
             <artifactId>hsqldb</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <!-- Spring security -->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
-            <version>${spring-security-version}</version>
-        </dependency>
 
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-web</artifactId>
-            <version>${spring-security-version}</version>
-        </dependency>
 
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-config</artifactId>
-            <version>${spring-security-version}</version>
-        </dependency>
 
-        <dependency>
-            <groupId>com.allanditzel</groupId>
-            <artifactId>spring-security-csrf-token-filter</artifactId>
-            <version>1.1</version>
-        </dependency>
         <!-- Guava -->
 
         <dependency>
@@ -133,58 +112,5 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    <build>
-        <finalName>Black-Jack</finalName>
-        <sourceDirectory>${basedir}\src\main\java</sourceDirectory>
 
-        <testSourceDirectory>${basedir}\src\test\java</testSourceDirectory>
-
-        <resources>
-            <!--<include>**/*.properties</include>-->
-            <!--</includes>-->
-            <!--</resource>-->
-            <resource>
-                <directory>${basedir}/src/main/resources</directory>
-            </resource>
-        </resources>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
-            </plugin>
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-dependency-plugin</artifactId>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>install</id>-->
-                        <!--<phase>install</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>sources</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
-            <!--<plugin>-->
-                <!--<groupId>org.apache.tomcat.maven</groupId>-->
-                <!--<artifactId>tomcat7-maven-plugin</artifactId>-->
-                <!--<configuration>-->
-                    <!--<path>/</path>-->
-                    <!--<httpsPort>8443</httpsPort>-->
-                    <!--<keystoreFile>${basedir}/other/keystore.jks</keystoreFile>-->
-                    <!--<keystorePass>secret</keystorePass>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
-
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 </project>
