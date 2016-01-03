@@ -9,7 +9,7 @@
     <modules>
         <module>model</module>
         <module>Server-Spec</module>
-        <module>Sever-Impl</module>
+        <module>Server-Impl</module>
         <module>BlackJackClient</module>
     </modules>
     <name>Black-Jack Maven WebApp</name>
