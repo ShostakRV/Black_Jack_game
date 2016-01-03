@@ -3,6 +3,7 @@ package com.my.application.black.jack.controller;
 import com.my.application.black.jack.service.GameService;
 import com.my.application.black.jack.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,7 @@ public class TestRestController {
     }
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public java.lang.String helloWorld() {
+    public String helloWorld() {
         return "HelloWorld! User name: " + SecurityContextHolder.getContext().getAuthentication().getName();
     }
 

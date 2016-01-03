@@ -1,4 +1,4 @@
-package com.my.application.black.jack.config;
+package com.my.application.black.jack.config.root;
 
 
 import com.allanditzel.springframework.security.web.csrf.CsrfTokenResponseHeaderBindingFilter;
@@ -16,7 +16,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
-import org.springframework.security.web.csrf.CsrfFilter;
 
 /**
  * The Spring Security configuration for the application - its a form login config with authentication via session cookie (once logged in),
@@ -32,7 +31,6 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private SecurityUserDetailsService securityUserDetailsService;
-
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
