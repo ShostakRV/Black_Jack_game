@@ -1,10 +1,13 @@
 package com.my.application.black.jack.config;
 
 
+import com.allanditzel.springframework.security.web.csrf.CsrfTokenResponseHeaderBindingFilter;
 import com.my.application.black.jack.config.security.AjaxAuthenticationSuccessHandler;
 import com.my.application.black.jack.config.security.SecurityUserDetailsService;
+import com.my.application.black.jack.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -13,6 +16,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.security.web.csrf.CsrfFilter;
 
 /**
  * The Spring Security configuration for the application - its a form login config with authentication via session cookie (once logged in),
@@ -29,6 +33,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private SecurityUserDetailsService securityUserDetailsService;
 
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(securityUserDetailsService).passwordEncoder(new BCryptPasswordEncoder());
@@ -37,11 +42,9 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-//        CsrfTokenResponseHeaderBindingFilter csrfTokenFilter = new CsrfTokenResponseHeaderBindingFilter();
-//        http.addFilterAfter(csrfTokenFilter, CsrfFilter./class);
-
-        http
-                .authorizeRequests()
+        CsrfTokenResponseHeaderBindingFilter csrfTokenFilter = new CsrfTokenResponseHeaderBindingFilter();
+        http.authorizeRequests()
+//        http.addFilterAfter(csrfTokenFilter, CsrfFilter.class);
 //                .antMatchers("/index.html").permitAll()
 //                .antMatchers("/game/**").permitAll()
                 .antMatchers("/authorization/**").permitAll()
@@ -66,10 +69,14 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/index.html")
                 .permitAll();
-//
         if ("true".equals(System.getProperty("httpsOnly"))) {
             LOGGER.info("launching the application in HTTPS-only mode");
             http.requiresChannel().anyRequest().requiresSecure();
         }
+    }
+
+    @Bean
+    public SecurityUserDetailsService getSecurityUserDetailsService(UserService userService) {
+        return new SecurityUserDetailsService(userService);
     }
 }

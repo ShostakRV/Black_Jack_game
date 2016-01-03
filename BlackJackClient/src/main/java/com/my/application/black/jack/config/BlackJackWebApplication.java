@@ -1,6 +1,8 @@
 package com.my.application.black.jack.config;
 
+import com.my.application.black.jack.config.security.SecurityUserDetailsService;
 import com.my.application.black.jack.init.TestDataInitializer;
+import com.my.application.black.jack.service.UserService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,9 +21,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
  */
 
 @Configuration
-@EnableAutoConfiguration()
-@EnableJpaRepositories(basePackages = "com.my.application.black.jack.dao")
-@EntityScan(basePackages = {"com.my.application.black.jack.model"})
+
+@EnableAutoConfiguration
+//@EnableJpaRepositories(basePackages = "com.my.application.black.jack.dao")
+//@EntityScan(basePackages = {"com.my.application.black.jack.model"})
 @ComponentScan(basePackages = {"com.my.application.black.jack"})
 public class BlackJackWebApplication extends SpringBootServletInitializer {
 
@@ -36,6 +39,8 @@ public class BlackJackWebApplication extends SpringBootServletInitializer {
 
     @Override
     protected final SpringApplicationBuilder configure(final SpringApplicationBuilder application) {
-        return application.sources(BlackJackWebApplication.class);
+        return application.sources(BlackJackWebApplication.class);//, ServerConfig.class, AppSecurityConfig.class
     }
+
+
 }

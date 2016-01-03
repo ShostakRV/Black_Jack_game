@@ -2,8 +2,12 @@ package jack;
 
 import com.my.application.black.jack.dao.GameRepository;
 import com.my.application.black.jack.model.Game;
+import com.my.application.black.jack.service.GameService;
+import com.my.application.black.jack.service.GameServiceImpl;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -21,15 +25,20 @@ public class GameServiceMockTest {
     @Mock
     private GameRepository gameRepository;
 
+    @InjectMocks
+    private GameServiceImpl gameService;
+
     @Mock
     private Game game;
 
+    @Before
+    public void init(){
+        when(gameRepository.saveAndFlush(game)).thenReturn(game);
+    }
+
     @Test
     public void test1() {
-        Game t = new Game();
-        when(gameRepository.saveAndFlush(t)).thenReturn(t);
-
-        Game t2 = gameRepository.saveAndFlush(t);
-        assertTrue(t == t2);
+        Game t2 = gameRepository.saveAndFlush(game);
+        assertTrue(game == t2);
     }
 }

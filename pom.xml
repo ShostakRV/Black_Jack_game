@@ -11,6 +11,7 @@
         <module>Server-Spec</module>
         <module>Server-Impl</module>
         <module>BlackJackClient</module>
+        <module>IntegrationTests</module>
     </modules>
     <name>Black-Jack Maven WebApp</name>
 

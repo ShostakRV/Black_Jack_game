@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * UserDetails service that reads the user credentials from the database, using a JPA repository.
  */
-@Service
+//@Service
 public class SecurityUserDetailsService implements UserDetailsService {
 
     private static final Logger LOGGER = Logger.getLogger(SecurityUserDetailsService.class);
