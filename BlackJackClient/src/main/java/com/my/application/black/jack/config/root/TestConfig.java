@@ -15,7 +15,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 @Configuration
 public class TestConfig {
 
-    public static final String TEST_PROFILE = "Test";
+    public static final String TEST_PROFILE = "test";
 
 //    @Bean(name = "datasource")
 //    @Profile("")

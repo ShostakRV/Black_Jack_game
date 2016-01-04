@@ -37,7 +37,7 @@ public class ServerConfig {
     }
 
     @Bean(name = "entityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Qualifier("datasource") DriverManagerDataSource dataSource) {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Qualifier("dataSource") DriverManagerDataSource dataSource) {
 
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(dataSource);
