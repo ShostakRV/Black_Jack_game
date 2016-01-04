@@ -1,6 +1,8 @@
 package com.my.application.black.jack.config;
 
 import com.my.application.black.jack.config.root.AppSecurityConfig;
+import com.my.application.black.jack.config.root.TestConfig;
+import com.my.application.black.jack.config.root.WebMvcConfig;
 import com.my.application.black.jack.init.TestDataInitializer;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,6 +10,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 /**
@@ -16,12 +19,8 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
  */
 //@Configuration
 
-@SpringBootApplication( scanBasePackageClasses = {ServerConfig.class, AppSecurityConfig.class}, scanBasePackages = "com.my.application.black.jack.controller")
-//@EnableAutoConfiguration
-//@EnableJpaRepositories(basePackages = "com.my.application.black.jack.dao")
-//@EntityScan(basePackages = {"com.my.application.black.jack.model"})
+@SpringBootApplication( scanBasePackageClasses = {ServerConfig.class, AppSecurityConfig.class, WebMvcConfig.class})
 //@Profile(value = "Test")
-//@ComponentScan(basePackages = {"com.my.application.black.jack"})
 public class RootConfig {
     @Bean(initMethod = "init")
     public TestDataInitializer initTestData() {
@@ -29,7 +28,7 @@ public class RootConfig {
     }
 
     @Bean(name = "dataSource")
-//    @Profile(TestConfig.TEST_PROFILE)
+    @Profile(TestConfig.TEST_PROFILE)
     public DriverManagerDataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(org.hsqldb.jdbcDriver.class.getName());
