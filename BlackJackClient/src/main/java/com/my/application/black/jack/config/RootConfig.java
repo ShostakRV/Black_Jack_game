@@ -26,15 +26,4 @@ public class RootConfig {
     public TestDataInitializer initTestData() {
         return new TestDataInitializer();
     }
-
-    @Bean(name = "dataSource")
-    @Profile(TestConfig.TEST_PROFILE)
-    public DriverManagerDataSource dataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(org.hsqldb.jdbcDriver.class.getName());
-        dataSource.setUrl("jdbc:hsqldb:mem:mydb");
-        dataSource.setUsername("sa");
-        dataSource.setPassword("jdbc:hsqldb:mem:mydb");
-        return dataSource;
-    }
 }
