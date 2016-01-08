@@ -1,8 +1,7 @@
-package jack;
+package com.my.application.black.jack;
 
 import com.my.application.black.jack.dao.GameRepository;
 import com.my.application.black.jack.model.Game;
-import com.my.application.black.jack.service.GameService;
 import com.my.application.black.jack.service.GameServiceImpl;
 import org.junit.Before;
 import org.junit.Test;

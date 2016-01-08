@@ -4,7 +4,6 @@ package com.my.application.black.jack.service;
 import com.my.application.black.jack.dao.UserRepository;
 import com.my.application.black.jack.exception.UserAlreadyExistsException;
 import com.my.application.black.jack.model.User;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -33,8 +32,8 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User save(@NotNull @Valid final User user) {
         LOGGER.debug("Creating {}", user);
-        User existing = repository.findOne(user.getId());
-        if (existing != null) {
+        User existing;
+        if (user.getId() != null && (existing = repository.findOne(user.getId())) == null) {
             throw new UserAlreadyExistsException(
                     String.format("There already exists a user with id=%s", user.getId()));
         }
