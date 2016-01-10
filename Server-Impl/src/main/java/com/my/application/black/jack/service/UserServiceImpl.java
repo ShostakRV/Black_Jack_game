@@ -6,11 +6,11 @@ import com.my.application.black.jack.exception.UserAlreadyExistsException;
 import com.my.application.black.jack.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
-import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
     private final UserRepository repository;
 
-    @Inject
+    @Autowired
     public UserServiceImpl(final UserRepository repository) {
         this.repository = repository;
     }
@@ -31,13 +31,15 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User save(@NotNull @Valid final User user) {
+
         LOGGER.debug("Creating {}", user);
         User existing;
-        if (user.getId() != null && (existing = repository.findOne(user.getId())) == null) {
+        if (user.getEmail() != null && (existing = repository.findByEmail(user.getEmail())) != null) {
             throw new UserAlreadyExistsException(
-                    String.format("There already exists a user with id=%s", user.getId()));
+                    String.format("There already exists a user with id=%s", existing.getId()));
         }
-        return repository.save(user);
+
+        return repository.saveAndFlush(user);
     }
 
     @Override

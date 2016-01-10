@@ -1,9 +1,7 @@
-package com.my.application.black.jack.config.root;
+package com.my.application.black.jack.config.security;
 
 
 import com.allanditzel.springframework.security.web.csrf.CsrfTokenResponseHeaderBindingFilter;
-import com.my.application.black.jack.config.security.AjaxAuthenticationSuccessHandler;
-import com.my.application.black.jack.config.security.SecurityUserDetailsService;
 import com.my.application.black.jack.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

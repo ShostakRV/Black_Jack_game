@@ -1,4 +1,4 @@
-package com.my.application.black.jack.config;
+package com.my.applicatiom.black.jack.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
