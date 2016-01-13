@@ -24,6 +24,7 @@ public class BlackJackWebApplication extends SpringBootServletInitializer {
 
     @Override
     protected final SpringApplicationBuilder configure(final SpringApplicationBuilder application) {
+        application.profiles("test");
         return application.sources(BlackJackWebApplication.class);
     }
 
