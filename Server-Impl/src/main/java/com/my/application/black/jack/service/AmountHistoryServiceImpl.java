@@ -1,10 +1,9 @@
 package com.my.application.black.jack.service;
 
 import com.my.application.black.jack.dao.AmountHistoryRepository;
-import com.my.application.black.jack.service.AmountHistoryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.inject.Inject;
 
 /**
  * Developer: Roman Shostak
@@ -14,7 +13,7 @@ import javax.inject.Inject;
 public class AmountHistoryServiceImpl implements AmountHistoryService {
     private AmountHistoryRepository amountHistoryRepository;
 
-    @Inject
+    @Autowired
     public AmountHistoryServiceImpl(AmountHistoryRepository amountHistoryRepository) {
         this.amountHistoryRepository = amountHistoryRepository;
     }

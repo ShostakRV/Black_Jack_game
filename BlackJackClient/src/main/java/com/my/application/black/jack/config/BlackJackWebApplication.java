@@ -13,7 +13,7 @@ import javax.servlet.ServletException;
  * Date: 08-Oct-15.
  */
 
-@SpringBootApplication(scanBasePackageClasses = RootConfig.class)
+@SpringBootApplication
 public class BlackJackWebApplication extends SpringBootServletInitializer {
 
 
@@ -25,7 +25,7 @@ public class BlackJackWebApplication extends SpringBootServletInitializer {
     @Override
     protected final SpringApplicationBuilder configure(final SpringApplicationBuilder application) {
         application.profiles("test");
-        return application.sources(BlackJackWebApplication.class);
+        return application.sources(RootConfig.class);
     }
 
     @Override

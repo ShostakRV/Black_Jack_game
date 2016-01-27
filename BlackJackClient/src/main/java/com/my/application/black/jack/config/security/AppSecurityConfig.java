@@ -1,7 +1,5 @@
 package com.my.application.black.jack.config.security;
 
-
-import com.allanditzel.springframework.security.web.csrf.CsrfTokenResponseHeaderBindingFilter;
 import com.my.application.black.jack.service.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,10 +36,10 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        CsrfTokenResponseHeaderBindingFilter csrfTokenFilter = new CsrfTokenResponseHeaderBindingFilter();
+//        CsrfTokenResponseHeaderBindingFilter csrfTokenFilter = new CsrfTokenResponseHeaderBindingFilter();
         http.authorizeRequests()
 //        http.addFilterAfter(csrfTokenFilter, CsrfFilter.class);
-//                .antMatchers("/index.html").permitAll()
+                .antMatchers("/index.html", "/index", "/").permitAll()
 //                .antMatchers("/game/**").permitAll()
                 .antMatchers("/authorization/**").permitAll()
                 .antMatchers("/resources/img/**").permitAll()
@@ -57,7 +55,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .successHandler(new AjaxAuthenticationSuccessHandler(new SavedRequestAwareAuthenticationSuccessHandler()))
-//                .loginPage("/authorization/login.html")
+//                .loginPage("/public/login.html")
                 .and()
                 .httpBasic()
                 .and()
