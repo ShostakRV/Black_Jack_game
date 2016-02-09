@@ -9,7 +9,7 @@
     <logger name="com.my.application.black.jack" additivity="false" level="TRACE">
         <appender-ref ref="stdout"/>
     </logger>
-    <logger name="org.springframework" additivity="false" level="DEBUG">
+    <logger name="org.springframework" additivity="false" level="INFO">
         <appender-ref ref="stdout"/>
     </logger>
     <root level="WARN">

@@ -37,6 +37,15 @@
         </dependency>
 
         <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
@@ -55,29 +64,7 @@
         </dependency>
 
 
-        <!-- Spring security -->
-        <!--<dependency>-->
-        <!--<groupId>org.springframework.security</groupId>-->
-        <!--<artifactId>spring-security-core</artifactId>-->
-        <!--<version>${spring-security-version}</version>-->
-        <!--</dependency>-->
 
-        <!--<dependency>-->
-        <!--<groupId>org.springframework.security</groupId>-->
-        <!--<artifactId>spring-security-web</artifactId>-->
-        <!--<version>${spring-security-version}</version>-->
-        <!--</dependency>-->
-
-        <!--<dependency>-->
-        <!--<groupId>org.springframework.security</groupId>-->
-        <!--<artifactId>spring-security-config</artifactId>-->
-        <!--<version>${spring-security-version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.springframework</groupId>-->
-        <!--<artifactId>spring-test</artifactId>-->
-        <!--<version>4.2.4.RELEASE</version>-->
-        <!--</dependency>-->
 
     </dependencies>
 
@@ -97,14 +84,6 @@
             </resource>
         </resources>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>

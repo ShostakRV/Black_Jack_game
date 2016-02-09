@@ -3,6 +3,7 @@ package com.my.application.black.jack.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Creator: Shostak Roman
@@ -17,9 +18,9 @@ public class PageController {
         return "index";
     }
 
-    //    @RequestMapping(value = {"/WEB-INF/index.jsp"} , method = RequestMethod.GET)
-    public String index2() {
+    @RequestMapping(value = {"/index2"}, method = RequestMethod.GET)
+    public ModelAndView index2() {
 
-        return "index";
+        return new ModelAndView("index");
     }
 }
