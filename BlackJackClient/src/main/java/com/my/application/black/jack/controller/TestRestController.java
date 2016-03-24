@@ -3,7 +3,6 @@ package com.my.application.black.jack.controller;
 import com.my.application.black.jack.service.GameService;
 import com.my.application.black.jack.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,11 +32,9 @@ public class TestRestController {
         return new SomeDto(1, name, "Some default");
     }
 
-
     @RequestMapping(value = "/testDto/{some}", method = RequestMethod.GET)
     public SomeDto testDto2(@RequestParam(value = "name", defaultValue = "Default Name") String name,
                             @PathVariable(value = "some") String some) {
-
         return new SomeDto(1L, name, some);
     }
 
