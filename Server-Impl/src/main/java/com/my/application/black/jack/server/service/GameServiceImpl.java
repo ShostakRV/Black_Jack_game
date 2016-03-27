@@ -24,14 +24,13 @@ public class GameServiceImpl implements GameService {
 
     private GameRepository gameRepository;
     private UserRepository userRepository;
-
-    @Autowired
     private ApplicationContext applicationContext;
 
     @Autowired
-    public GameServiceImpl(GameRepository gameRepository, UserRepository userRepository) {
+    public GameServiceImpl(GameRepository gameRepository, UserRepository userRepository, ApplicationContext applicationContext) {
         this.gameRepository = gameRepository;
         this.userRepository = userRepository;
+        this.applicationContext = applicationContext;
     }
 
     @Override
@@ -42,7 +41,7 @@ public class GameServiceImpl implements GameService {
 
         CardGenerator generator = applicationContext.getBean(CardGenerator.class);
 
-        Game game = new Game();
+        Game game = gameRepository.newGame();
         game.setUser(user);
         game.setRate(rate);
         game.setUserCard1(generator.nextCard());

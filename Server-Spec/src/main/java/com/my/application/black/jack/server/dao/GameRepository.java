@@ -8,4 +8,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * Date: 13-Oct-15.
  */
 public interface GameRepository extends JpaRepository<Game, Long> {
+    default Game newGame() {
+        return new Game();
+    }
+
+    ;
 }
