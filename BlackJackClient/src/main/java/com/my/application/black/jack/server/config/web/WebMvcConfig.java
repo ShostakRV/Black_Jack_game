@@ -3,9 +3,7 @@ package com.my.application.black.jack.server.config.web;
 import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.*;
 
 /**
  * Created: Shostak Roman
@@ -23,18 +21,18 @@ public class WebMvcConfig extends WebMvcAutoConfiguration.WebMvcAutoConfiguratio
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/home").setViewName("home");
-        registry.addViewController("/").setViewName("home");
+        registry.addViewController("/").setViewName("index");
         registry.addViewController("/hello").setViewName("hello");
         registry.addViewController("/login").setViewName("login");
     }
 //    @Override
 
 //    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-////        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+//        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 //    }
 
 //    @Override
-//    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+//    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer conf) {
 //    }
 //
 //    @Override

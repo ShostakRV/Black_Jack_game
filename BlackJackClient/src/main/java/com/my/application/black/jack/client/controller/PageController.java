@@ -12,15 +12,15 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class PageController {
 
-    @RequestMapping(value = {"/public/login", "/"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/public/login" }, method = RequestMethod.GET)
     public String index() {
 
-        return "index";
+        return "home";
     }
 
-    @RequestMapping(value = {"/index2"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/myTemplate"}, method = RequestMethod.GET)
     public ModelAndView index2() {
 
-        return new ModelAndView("index");
+        return new ModelAndView("myTemplate");
     }
 }

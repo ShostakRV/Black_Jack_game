@@ -21,7 +21,6 @@ import org.springframework.context.annotation.Configuration;
 @SpringBootApplication
 public class BlackJackWebApplication {//extends SpringBootServletInitializer
 
-
     public static void main(String[] args) {
         //TODO run with: --spring.profiles.active=test
         SpringApplication.run(BlackJackWebApplication.class, "--spring.profiles.active=test");
