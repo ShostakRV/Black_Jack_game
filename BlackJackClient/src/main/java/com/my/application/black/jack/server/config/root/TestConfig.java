@@ -1,6 +1,6 @@
 package com.my.application.black.jack.server.config.root;
 
-import com.my.application.black.jack.client.init.TestDataInitializer;
+import com.my.application.black.jack.server.config.root.init.TestDataInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
