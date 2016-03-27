@@ -14,14 +14,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 //@Configuration
 
-@Configuration
-@ConditionalOnClass(value = {ServerConfig.class, AppSecurityConfig.class, WebMvcConfig.class})
+//@Configuration
+//@ConditionalOnClass(value = {ServerConfig.class, AppSecurityConfig.class, WebMvcConfig.class})
 //        ( scanBasePackageClasses = {ServerConfig.class, AppSecurityConfig.class, WebMvcConfig.class})
-@EnableTransactionManagement
+//@EnableTransactionManagement
 //@Profile(value = "Test")
 public class RootConfig {
-    @Bean(initMethod = "init")
-    public TestDataInitializer initTestData() {
-        return new TestDataInitializer();
-    }
+
 }

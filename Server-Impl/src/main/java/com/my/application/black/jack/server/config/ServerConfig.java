@@ -12,6 +12,7 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
 import java.util.HashMap;
@@ -25,6 +26,7 @@ import java.util.Map;
 @EnableJpaRepositories(basePackages = "com.my.application.black.jack.server.dao")
 @EntityScan(basePackages = {"com.my.application.black.jack.model"})
 @ComponentScan(basePackages = {"com.my.application.black.jack.server"})
+@EnableTransactionManagement
 public class ServerConfig {
 
     @Bean(name = "transactionManager")

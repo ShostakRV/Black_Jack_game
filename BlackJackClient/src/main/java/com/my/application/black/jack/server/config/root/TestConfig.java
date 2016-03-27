@@ -1,5 +1,6 @@
 package com.my.application.black.jack.server.config.root;
 
+import com.my.application.black.jack.client.init.TestDataInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -15,7 +16,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 @Configuration
 public class TestConfig {
 
-    public static final String TEST_PROFILE = "test";
+    static final String TEST_PROFILE = "test";
 
     @Bean(name = "dataSource")
     public DriverManagerDataSource dataSource() {
@@ -25,6 +26,11 @@ public class TestConfig {
         dataSource.setUsername("sa");
         dataSource.setPassword("jdbc:hsqldb:mem:mydb");
         return dataSource;
+    }
+
+    @Bean(initMethod = "init")
+    public TestDataInitializer initTestData() {
+        return new TestDataInitializer();
     }
 
 }
