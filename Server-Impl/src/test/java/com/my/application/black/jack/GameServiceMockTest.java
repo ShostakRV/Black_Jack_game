@@ -17,6 +17,10 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 import org.springframework.context.ApplicationContext;
 
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -45,6 +49,23 @@ public class GameServiceMockTest {
 
     @Before
     public void init() {
+
+        CardGenerator proxy = (CardGenerator) Proxy.newProxyInstance(
+                CardGenerator.class.getClassLoader(),
+                new Class[]{CardGenerator.class},
+                new InvocationHandler() {
+                    CardGenerator obj;
+
+                    @Override
+                    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                        if (obj == null) {
+                            obj = applicationContext.getBean(CardGenerator.class);
+                        }
+//                        method.getName() ==
+                        return method.invoke(obj, args);
+                    }
+                });
+//        applicationContext =
 //        gameService = new GameServiceImpl(gameRepository, userRepository, applicationContext);
         when(gameRepository.saveAndFlush(game)).thenReturn(game);
         when(gameRepository.newGame()).thenReturn(game);
@@ -74,7 +95,7 @@ public class GameServiceMockTest {
     @Test
     public void test1() {
         Game t2 = gameRepository.saveAndFlush(game);
-        verify(game).setUserCard1(Card.CLUBS_2);
+//        verify(game).setUserCard1(Card.CLUBS_2);
         assertTrue(game == t2);
         verify(gameRepository).saveAndFlush(game);
     }
