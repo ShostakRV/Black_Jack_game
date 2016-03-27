@@ -1,8 +1,8 @@
 package com.my.application.black.jack;
 
-import com.my.application.black.jack.dao.GameRepository;
+import com.my.application.black.jack.server.dao.GameRepository;
 import com.my.application.black.jack.model.Game;
-import com.my.application.black.jack.service.GameServiceImpl;
+import com.my.application.black.jack.server.service.GameServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
