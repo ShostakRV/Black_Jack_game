@@ -2,10 +2,7 @@ package com.my.application.black.jack.server.config.web;
 
 import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration;
 import org.springframework.context.annotation.*;
-import org.springframework.http.CacheControl;
 import org.springframework.web.servlet.config.annotation.*;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created: Shostak Roman
@@ -18,7 +15,8 @@ public class WebMvcConfig extends WebMvcAutoConfiguration.WebMvcAutoConfiguratio
 
 	private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {
 		"classpath:/META-INF/resources/", "classpath:/resources/",
-		"classpath:/static/", "classpath:/public/", "classpath:/public-resources/",  "classpath:/Web-INF/resources"
+		"classpath:/static/", "classpath:/public/", "classpath:/public-resources/",
+		"classpath:/WEB-INF/resources", "classpath:/"
 	};
 
 
@@ -32,9 +30,9 @@ public class WebMvcConfig extends WebMvcAutoConfiguration.WebMvcAutoConfiguratio
 
 	@Override
 	public void addResourceHandlers( ResourceHandlerRegistry registry ) {
-		registry.addResourceHandler( "/resources/**" )
-				.addResourceLocations( CLASSPATH_RESOURCE_LOCATIONS )
-				.setCacheControl( CacheControl.maxAge( 1, TimeUnit.HOURS ).cachePublic() );
+//		registry.addResourceHandler( "/resources/**" )
+//				.addResourceLocations( CLASSPATH_RESOURCE_LOCATIONS )
+//				.setCacheControl( CacheControl.maxAge( 1, TimeUnit.HOURS ).cachePublic() );
 	}
 
 	@Override
