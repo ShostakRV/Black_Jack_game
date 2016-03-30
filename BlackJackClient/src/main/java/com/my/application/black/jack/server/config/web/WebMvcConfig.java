@@ -16,7 +16,7 @@ public class WebMvcConfig extends WebMvcAutoConfiguration.WebMvcAutoConfiguratio
 	private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {
 		"classpath:/META-INF/resources/", "classpath:/resources/",
 		"classpath:/static/", "classpath:/public/", "classpath:/public-resources/",
-		"classpath:/WEB-INF/resources", "classpath:/"
+		"classpath:/WEB-INF/resources"
 	};
 
 
@@ -30,6 +30,9 @@ public class WebMvcConfig extends WebMvcAutoConfiguration.WebMvcAutoConfiguratio
 
 	@Override
 	public void addResourceHandlers( ResourceHandlerRegistry registry ) {
+		super.addResourceHandlers( registry );
+
+		registry.addResourceHandler( "/**" ).addResourceLocations( "classpath:/webapp/" );
 //		registry.addResourceHandler( "/resources/**" )
 //				.addResourceLocations( CLASSPATH_RESOURCE_LOCATIONS )
 //				.setCacheControl( CacheControl.maxAge( 1, TimeUnit.HOURS ).cachePublic() );

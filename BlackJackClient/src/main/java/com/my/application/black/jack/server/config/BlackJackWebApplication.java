@@ -2,6 +2,8 @@ package com.my.application.black.jack.server.config;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.web.SpringBootServletInitializer;
 
 /**
  * Developer: Roman Shostak
@@ -13,11 +15,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //@EnableAutoConfiguration
 //@ComponentScan("com.my.application.black.jack.client")
 @SpringBootApplication
-public class BlackJackWebApplication {//extends SpringBootServletInitializer
+public class BlackJackWebApplication  extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         //TODO run with: --spring.profiles.active=test
-        SpringApplication.run(BlackJackWebApplication.class, "--spring.profiles.active=test");
+        SpringApplication.run( BlackJackWebApplication.class, "--spring.profiles.active=test");
+    }
+    @Override
+    protected SpringApplicationBuilder configure( SpringApplicationBuilder application) {
+        application.profiles( "test" );
+        return application.sources(BlackJackWebApplication.class);
     }
 
 //    @Override
