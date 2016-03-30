@@ -1,4 +1,4 @@
-package com.my.application.black.jack.server.config.root.init;
+package com.my.application.black.jack.run.config.root.init;
 
 
 import com.my.application.black.jack.model.User;

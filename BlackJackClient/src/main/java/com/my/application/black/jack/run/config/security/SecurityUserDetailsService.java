@@ -1,4 +1,4 @@
-package com.my.application.black.jack.server.config.security;
+package com.my.application.black.jack.run.config.security;
 
 
 import com.my.application.black.jack.model.User;

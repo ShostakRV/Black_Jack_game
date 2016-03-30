@@ -1,4 +1,4 @@
-package com.my.application.black.jack.server.config.security;
+package com.my.application.black.jack.run.config.security;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;

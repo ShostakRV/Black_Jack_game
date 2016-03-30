@@ -1,4 +1,4 @@
-package com.my.application.black.jack.server.config.web;
+package com.my.application.black.jack.run.config.web;
 
 import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration;
 import org.springframework.context.annotation.*;
