@@ -1,127 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>Black-Jack</artifactId>
-        <groupId>com.my.application.black.jack</groupId>
-        <version>1.0.0-SNAPSHOT</version>
-    </parent>
-    <modelVersion>4.0.0</modelVersion>
-    <packaging>jar</packaging>
+		 xmlns="http://maven.apache.org/POM/4.0.0"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>Black-Jack</artifactId>
+		<groupId>com.my.application.black.jack</groupId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<packaging>jar</packaging>
 
-    <artifactId>BlackJackClient</artifactId>
+	<artifactId>BlackJackClient</artifactId>
 
-    <properties>
-
-
-        <java.version>1.8</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-        <!--<start-class>com.my.application.black.jack.server.config.BlackJackWebApplication</start-class>-->
-        <!--<main.basedir>${basedir}/../..</main.basedir>-->
-        <!--<m2eclipse.wtp.contextRoot>/</m2eclipse.wtp.contextRoot>-->
-
-    </properties>
+	<properties>
 
 
-    <dependencies>
+		<java.version>1.8</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <dependency>
-            <groupId>com.my.application.black.jack</groupId>
-            <artifactId>Server-Impl</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
+        <!--<start-class>com.my.application.black.jack.server.config.BlackJack WebApplication</start-class>-->
+		<!--<main.basedir>${basedir}/../..</main.basedir>-->
+		<!--<m2eclipse.wtp.contextRoot>/</m2eclipse.wtp.contextRoot>-->
 
-        <dependency>
-            <groupId>com.my.application.black.jack</groupId>
-            <artifactId>Server-Spec</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
-        <!--</dependency>-->
-
-        <!--<dependency>-->
-            <!--<groupId>org.apache.tomcat.embed</groupId>-->
-            <!--<artifactId>tomcat-embed-jasper</artifactId>-->
-            <!--<scope>provided</scope>-->
-        <!--</dependency>-->
-
-        <!--<dependency>-->
-        <!--<groupId>com.allanditzel</groupId>-->
-        <!--<artifactId>spring-security-csrf-token-filter</artifactId>-->
-        <!--<version>1.1</version>-->
-        <!--</dependency>-->
+	</properties>
 
 
+	<dependencies>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
+		<dependency>
+			<groupId>com.my.application.black.jack</groupId>
+			<artifactId>Server-Impl</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.my.application.black.jack</groupId>
+			<artifactId>Server-Spec</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
 
 
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.boot</groupId>-->
+			<!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
+		<!--</dependency>-->
+
+		<!--<dependency>-->
+		<!--<groupId>org.apache.tomcat.embed</groupId>-->
+		<!--<artifactId>tomcat-embed-jasper</artifactId>-->
+		<!--<scope>provided</scope>-->
+		<!--</dependency>-->
+
+		<!--<dependency>-->
+		<!--<groupId>com.allanditzel</groupId>-->
+		<!--<artifactId>spring-security-csrf-token-filter</artifactId>-->
+		<!--<version>1.1</version>-->
+		<!--</dependency>-->
 
 
-    </dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 
 
-    <build>
-        <!--<finalName>Black-Jack</finalName>-->
-        <sourceDirectory>${basedir}\src\main\java</sourceDirectory>
-<!---->
-        <testSourceDirectory>${basedir}\src\test\java</testSourceDirectory>
+	</dependencies>
 
-        <resources>
-            <!--<include>**/*.properties</include>-->
-            <!--</includes>-->
-            <!--</resource>-->
-            <resource>
-                <directory>${basedir}/src/main/resources</directory>
-            </resource>
-        </resources>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>install</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>sources</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
 
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+	<build>
+		<!--<finalName>Black-Jack</finalName>-->
+		<sourceDirectory>${basedir}\src\main\java</sourceDirectory>
+		<!---->
+		<testSourceDirectory>${basedir}\src\test\java</testSourceDirectory>
+
+		<resources>
+			<!--<include>**/*.properties</include>-->
+			<!--</includes>-->
+			<!--</resource>-->
+			<resource>
+				<directory>${basedir}/src/main/resources</directory>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>install</id>
+						<phase>install</phase>
+						<goals>
+							<goal>sources</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 </project>

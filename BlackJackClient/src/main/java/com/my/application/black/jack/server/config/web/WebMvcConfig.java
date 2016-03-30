@@ -1,9 +1,11 @@
 package com.my.application.black.jack.server.config.web;
 
 import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.*;
+import org.springframework.http.CacheControl;
 import org.springframework.web.servlet.config.annotation.*;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created: Shostak Roman
@@ -11,33 +13,49 @@ import org.springframework.web.servlet.config.annotation.*;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.my.application.black.jack.client"})
-public class WebMvcConfig extends WebMvcAutoConfiguration.WebMvcAutoConfigurationAdapter{
-    private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {
-            "classpath:/META-INF/resources/", "classpath:/resources/",
-            "classpath:/static/", "classpath:/public/"};
+@ComponentScan( basePackages = {"com.my.application.black.jack.client"} )
+public class WebMvcConfig extends WebMvcAutoConfiguration.WebMvcAutoConfigurationAdapter {
+
+	private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {
+		"classpath:/META-INF/resources/", "classpath:/resources/",
+		"classpath:/static/", "classpath:/public/", "classpath:/public-resources/",  "classpath:/Web-INF/resources"
+	};
 
 
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/home").setViewName("index");
-        registry.addViewController("/").setViewName("index");
-        registry.addViewController("/hello").setViewName("hello");
-        registry.addViewController("/login").setViewName("login");
-    }
-//    @Override
+	@Override
+	public void addViewControllers( ViewControllerRegistry registry ) {
+		registry.addViewController( "/home" ).setViewName( "index" );
+		registry.addViewController( "/" ).setViewName( "index" );
+		registry.addViewController( "/hello" ).setViewName( "hello" );
+		registry.addViewController( "/login" ).setViewName( "login" );
+	}
 
-//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-//    }
+	@Override
+	public void addResourceHandlers( ResourceHandlerRegistry registry ) {
+		registry.addResourceHandler( "/resources/**" )
+				.addResourceLocations( CLASSPATH_RESOURCE_LOCATIONS )
+				.setCacheControl( CacheControl.maxAge( 1, TimeUnit.HOURS ).cachePublic() );
+	}
 
-//    @Override
-//    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer conf) {
-//    }
-//
-//    @Override
-//    public void configureViewResolvers(ViewResolverRegistry registry) {
-//        UrlBasedViewResolverRegistration urlBasedViewResolverRegistration = registry.jsp();
-//        System.out.print("");
-//    }
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) { //todo local interceptor: http://www.mkyong.com/spring-mvc/spring-mvc-internationalization-example/
+//		registry.addInterceptor(new LocaleChangeInterceptor());
+//		registry.addInterceptor(new ThemeChangeInterceptor()).addPathPatterns( "/**").excludePathPatterns( "/admin/**");
+//		registry.addInterceptor(new SecurityInterceptor()).addPathPatterns("/secure/*");
+	}
+	//    @Override
+
+	//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+	//        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+	//    }
+
+	//    @Override
+	//    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer conf) {
+	//    }
+	//
+	//    @Override
+	//    public void configureViewResolvers(ViewResolverRegistry registry) {
+	//        UrlBasedViewResolverRegistration urlBasedViewResolverRegistration = registry.jsp();
+	//        System.out.print("");
+	//    }
 }

@@ -1,13 +1,7 @@
 package com.my.application.black.jack.server.config;
 
-import com.my.application.black.jack.server.config.security.AppSecurityConfig;
-import com.my.application.black.jack.server.config.web.WebMvcConfig;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * Developer: Roman Shostak

@@ -1,7 +1,8 @@
 package com.my.applicatiom.black.jack.test.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+
+import com.my.applicatiom.black.jack.test.init.TestDataInitializer;
+import org.springframework.context.annotation.*;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 /**
@@ -18,6 +19,11 @@ public class IntegrationTestConfig {
         dataSource.setUsername("sa");
         dataSource.setPassword("jdbc:hsqldb:mem:mydb");
         return dataSource;
+    }
+
+    @Bean(initMethod = "init")
+    public TestDataInitializer initTestData() {
+        return new TestDataInitializer();
     }
 
 }

@@ -1,18 +1,16 @@
 package com.my.applicatiom.black.jack.test;
 
 
-import com.my.application.black.jack.server.config.BlackJackWebApplication;
+import com.my.applicatiom.black.jack.test.config.IntegrationTestConfig;
 import com.my.application.black.jack.model.User;
+import com.my.application.black.jack.server.config.ServerConfig;
 import com.my.application.black.jack.server.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.ContextHierarchy;
+import org.springframework.test.context.*;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -24,9 +22,9 @@ import static org.junit.Assert.assertEquals;
  * Date: 02.01.2016.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@WebAppConfiguration
+//@WebAppConfiguration
 @ActiveProfiles("test")
-@ContextHierarchy({@ContextConfiguration(classes = {BlackJackWebApplication.class})})//, IntegrationTestConfig.class
+@ContextHierarchy( {@ContextConfiguration( classes = {ServerConfig.class, IntegrationTestConfig.class} )} )//, IntegrationTestConfig.class
 @Transactional
 public class SpringIntegrationTest2 {
     @Autowired
