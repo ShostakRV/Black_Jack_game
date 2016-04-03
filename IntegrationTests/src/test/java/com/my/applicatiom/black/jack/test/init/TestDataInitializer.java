@@ -2,26 +2,28 @@ package com.my.applicatiom.black.jack.test.init;
 
 
 import com.my.application.black.jack.model.User;
-import org.hibernate.*;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManagerFactory;
+import java.math.BigDecimal;
 
 /**
- *
  * This is a initializing bean that inserts some test data in the database. It is only active in
  * the development profile, to see the data login with user123 / Password2 and do a search starting on
  * 1st of January 2015.
- *
  */
 
 public class TestDataInitializer {
 
     @Autowired
     private EntityManagerFactory entityManagerFactory;
+
     @PostConstruct
-    public void postConstruct(){
+    public void postConstruct() {
         System.out.print("");
     }
 
@@ -32,8 +34,8 @@ public class TestDataInitializer {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
-        User user = new User("test@email.com", "$2a$10$x9vXeDsSC2109FZfIJz.pOZ4dJ056xBpbesuMJg3jZ.ThQkV119tS" );
-
+        User user = new User("test@email.com", "$2a$10$x9vXeDsSC2109FZfIJz.pOZ4dJ056xBpbesuMJg3jZ.ThQkV119tS");
+        user.setAmount(new BigDecimal(5000));
         session.persist(user);
 
         transaction.commit();

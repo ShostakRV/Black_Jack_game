@@ -2,16 +2,16 @@ package com.my.application.black.jack.server.service.converter;
 
 import com.my.application.black.jack.model.Game;
 import com.my.application.black.jack.server.service.dto.GameDto;
+import org.springframework.stereotype.Component;
 
 /**
  * Developer: Roman Shostak
  * Date: 13-Oct-15.
  */
-public final class GameConverter {
-    private GameConverter() {
-    }
+@Component
+public class GameConverter {
 
-    public static GameDto convert(Game game) {
+    public GameDto convert(Game game) {
         GameDto dto = new GameDto();
         dto.setId(game.getId());
         dto.setRate(game.getRate());

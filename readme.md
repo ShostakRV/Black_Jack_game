@@ -1,4 +1,5 @@
 <div style="text-align:center"><img src ="https://raw.githubusercontent.com/ShostakRV/Black_Jack_game/master/docs/PIC.jpg" /></div>
+
 ##Technology stack:
 * Spring(MVC/DATA/Test ...),
 * Hibernate,

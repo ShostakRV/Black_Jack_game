@@ -26,6 +26,18 @@ public class AmountHistory extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     private AmountSource source;
 
+    @ManyToOne
+    @JoinColumn(name = "FK_GAME")
+    private Game game;
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
     public User getUser() {
         return user;
     }
