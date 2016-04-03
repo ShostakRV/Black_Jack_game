@@ -12,4 +12,7 @@
 
 
 ## Tutorials
-* Mockito -
+* [Mockito](http://mockito.org/)
+    * [Class Mockito](https://mockito.googlecode.com/hg-history/1.5/javadoc/org/mockito/Mockito.html)
+
+* [Securing a Web Application](https://spring.io/guides/gs/securing-web/)
