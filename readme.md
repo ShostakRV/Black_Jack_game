@@ -1,4 +1,4 @@
-[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
+[logo]: https://raw.githubusercontent.com/ShostakRV/Black_Jack_game/master/docs/PIC.jpg "Slogan"
 ![alt text][logo]
 ##Technology stack:
 * Spring(MVC/DATA/Test ...),
