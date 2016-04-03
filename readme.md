@@ -1,16 +1,18 @@
-<div style="text-align:center"><img src ="https://raw.githubusercontent.com/ShostakRV/Black_Jack_game/master/docs/PIC.jpg" /></div>
+<img src ="https://raw.githubusercontent.com/ShostakRV/Black_Jack_game/master/docs/PIC.jpg" />
 
 ##Technology stack:
-* Spring(MVC/DATA/Test ...),
-* Hibernate,
-* AngularJS/TypeScrip,
-* Mockito.
+* Spring(MVC/DATA/Test ...)
+* Hibernate
+* AngularJS/TypeScrip
+* Mockito
 
 ##Authorization credentials:
 | username | password|
 | --- | --- |
 | test@email.com | Password2|
 
+##IDEA configs
+<img src ="https://raw.githubusercontent.com/ShostakRV/Black_Jack_game/master/docs/Annotation_processing.jpg" />
 
 ## Tutorials and useful links
 * [Mockito](http://mockito.org/)
