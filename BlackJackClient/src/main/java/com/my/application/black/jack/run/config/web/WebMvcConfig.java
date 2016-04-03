@@ -25,18 +25,19 @@ public class WebMvcConfig extends WebMvcAutoConfiguration.WebMvcAutoConfiguratio
 		registry.addViewController( "/home" ).setViewName( "index" );
 		registry.addViewController( "/" ).setViewName( "index" );
 		registry.addViewController( "/hello" ).setViewName( "hello" );
-		registry.addViewController( "/login" ).setViewName( "login" );
+		registry.addViewController( "/login" ).setViewName( "login" );//			8-login-form/8-login-form/index
 	}
 
 	@Override
-	public void addResourceHandlers( ResourceHandlerRegistry registry ) {
-		super.addResourceHandlers( registry );
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 
-		registry.addResourceHandler( "/**" ).addResourceLocations( "classpath:/webapp/" );
-//		registry.addResourceHandler( "/resources/**" )
-//				.addResourceLocations( CLASSPATH_RESOURCE_LOCATIONS )
-//				.setCacheControl( CacheControl.maxAge( 1, TimeUnit.HOURS ).cachePublic() );
+		registry.addResourceHandler("/css/**").addResourceLocations("/css/**");
+		registry.addResourceHandler("/img/**").addResourceLocations("/img/**");
+		registry.addResourceHandler("/js/**").addResourceLocations("/js/**");
+		registry.addResourceHandler("/sound/**").addResourceLocations("/sound/**");
+		registry.addResourceHandler("/fonts/**").addResourceLocations("/fonts/**");
 	}
+
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) { //todo local interceptor: http://www.mkyong.com/spring-mvc/spring-mvc-internationalization-example/
