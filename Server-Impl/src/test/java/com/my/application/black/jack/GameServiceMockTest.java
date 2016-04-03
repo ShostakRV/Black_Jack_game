@@ -94,10 +94,4 @@ public class GameServiceMockTest {
         //Закрытие игры и провод транзакций
 //        fail("dummy");
     }
-
-    @Test
-    public void testGameWhoIsWin() {
-        //проверка кто выиграл
-//        fail("dummy");
-    }
 }

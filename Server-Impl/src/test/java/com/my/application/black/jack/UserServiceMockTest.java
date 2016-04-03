@@ -35,12 +35,4 @@ public class UserServiceMockTest {
 //        fail("dummy");
     }
 
-    @Test
-    public void testUpdateUser() {
-        //обновление даных про пользователя
-//        fail("dummy");
-    }
-
-
-
 }
