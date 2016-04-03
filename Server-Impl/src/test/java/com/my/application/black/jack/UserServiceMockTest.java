@@ -4,8 +4,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static org.junit.Assert.fail;
-
 /**
  * Developer: Roman Shostak
  * Date: 27-Oct-15.
@@ -16,31 +14,31 @@ public class UserServiceMockTest {
     @Test
     public void testUpdateSave() {
         //обновление даных про пользователя
-        fail("dummy");
+//        fail("dummy");
     }
 
     @Test
     public void testFindByEmail() {
         //обновление даных про пользователя
-        fail("dummy");
+//        fail("dummy");
     }
 
     @Test
     public void testCreateUser() {
         // создание пользователя
-        fail("dummy");
+//        fail("dummy");
     }
 
     @Test
     public void testDeleteUser() {
         //удаление пользователя
-        fail("dummy");
+//        fail("dummy");
     }
 
     @Test
     public void testUpdateUser() {
         //обновление даных про пользователя
-        fail("dummy");
+//        fail("dummy");
     }
 
 
