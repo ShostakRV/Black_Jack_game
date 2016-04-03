@@ -12,7 +12,7 @@
 | test@email.com | Password2|
 
 ##IDEA configs
-<div style="widht: 200px">
+<div style="width: 200px">
 <img src ="https://raw.githubusercontent.com/ShostakRV/Black_Jack_game/master/docs/Annotation_processing.jpg" />
 </div>
 <img src ="https://raw.githubusercontent.com/ShostakRV/Black_Jack_game/master/docs/lombok_plugin.jpg" />
