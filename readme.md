@@ -16,4 +16,8 @@
 * [Mockito](http://mockito.org/)
     * [Class Mockito](https://mockito.googlecode.com/hg-history/1.5/javadoc/org/mockito/Mockito.html)
 
-* [Securing a Web Application](https://spring.io/guides/gs/securing-web/)
+* Sping
+    * [Securing a Web Application](https://spring.io/guides/gs/securing-web/)
+    * [Spring and Angular JS: A Secure Single Page Application](https://spring.io/blog/2015/01/12/spring-and-angular-js-a-secure-single-page-application#using-spring-boot-cli)
+* AngularJS
+    * [AngularJS Tutorial](http://www.tutorialspoint.com/angularjs/index.htm)
