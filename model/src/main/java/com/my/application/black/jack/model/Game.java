@@ -1,6 +1,7 @@
 package com.my.application.black.jack.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -11,9 +12,10 @@ import java.time.LocalDateTime;
  * Developer: Roman Shostak
  * Date: 12-Oct-15.
  */
+@EqualsAndHashCode(callSuper = true)
+@Data
 @Entity
 @Table(name = "GAME")
-@Data
 public class Game extends AbstractEntity {
     @NotNull
     @ManyToOne
