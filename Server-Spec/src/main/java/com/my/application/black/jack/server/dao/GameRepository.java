@@ -11,6 +11,4 @@ public interface GameRepository extends JpaRepository<Game, Long> {
     default Game newGame() {
         return new Game();
     }
-
-    ;
 }

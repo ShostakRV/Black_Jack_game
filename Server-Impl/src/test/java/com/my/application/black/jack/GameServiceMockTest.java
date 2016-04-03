@@ -1,11 +1,10 @@
 package com.my.application.black.jack;
 
 import com.my.application.black.jack.model.Card;
-import com.my.application.black.jack.server.dao.GameRepository;
 import com.my.application.black.jack.model.Game;
+import com.my.application.black.jack.server.dao.GameRepository;
 import com.my.application.black.jack.server.dao.UserRepository;
 import com.my.application.black.jack.server.service.CardGenerator;
-import com.my.application.black.jack.server.service.CardGeneratorImpl;
 import com.my.application.black.jack.server.service.GameServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,6 +21,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -34,8 +34,9 @@ import static org.mockito.Mockito.when;
 public class GameServiceMockTest {
 
     @Mock
+    Game game;
+    @Mock
     private GameRepository gameRepository;
-
     @InjectMocks
     private GameServiceImpl gameService;
     @Mock
@@ -44,8 +45,6 @@ public class GameServiceMockTest {
     private UserRepository userRepository;
     @Mock
     private CardGenerator generator;
-    @Mock
-    Game game;
 
     @Before
     public void init() {
@@ -95,12 +94,33 @@ public class GameServiceMockTest {
     @Test
     public void test1() {
         Game t2 = gameRepository.saveAndFlush(game);
-//        verify(game).setUserCard1(Card.CLUBS_2);
         assertTrue(game == t2);
         verify(gameRepository).saveAndFlush(game);
     }
 
     @Test
     public void testGameCreation() {
+        //создание игры
+        //подключение пользователя
+        //роздача карт
+        fail("dummy");
+    }
+
+    @Test
+    public void testGameStep() {
+        //шаг в игре(сдача карты или играко или курупе)
+        fail("dummy");
+    }
+
+    @Test
+    public void testGameEnd() {
+        //Закрытие игры и провод транзакций
+        fail("dummy");
+    }
+
+    @Test
+    public void testGameWhoIsWin() {
+        //проверка кто выиграл
+        fail("dummy");
     }
 }
