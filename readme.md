@@ -11,11 +11,6 @@
 | --- | --- |
 | test@email.com | Password2|
 
-##IDEA configs
-<div style="width: 200px">
-<img src ="https://raw.githubusercontent.com/ShostakRV/Black_Jack_game/master/docs/Annotation_processing.jpg" />
-</div>
-<img src ="https://raw.githubusercontent.com/ShostakRV/Black_Jack_game/master/docs/lombok_plugin.jpg" />
 
 ## Tutorials and useful links
 * [Mockito](http://mockito.org/)
@@ -28,3 +23,8 @@
     * [AngularJS Tutorial](http://www.tutorialspoint.com/angularjs/index.htm)
 * Other
     * [Markdown Cheatsheet *.md](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+
+##IDEA configs
+<img  width=400 src="https://raw.githubusercontent.com/ShostakRV/Black_Jack_game/master/docs/Annotation_processing.jpg" />
+
+<img width=400 src="https://raw.githubusercontent.com/ShostakRV/Black_Jack_game/master/docs/lombok_plugin.jpg" />
