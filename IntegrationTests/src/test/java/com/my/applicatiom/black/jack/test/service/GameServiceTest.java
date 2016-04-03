@@ -43,10 +43,8 @@ public class GameServiceTest {
     @Autowired
     private AmountHistoryRepository historyRepository;
 
-
     @Test
     public void testGameCreation() throws Exception {
-
         User user = userService.findByEmail("test@email.com");
         BigDecimal beforeMoney = user.getAmount();
         BigDecimal rate = new BigDecimal(100);
@@ -67,7 +65,6 @@ public class GameServiceTest {
         AmountHistory amountHistory = histories.get(0);
         assertEquals(beforeMoney, amountHistory.getBefore());
         assertEquals(afterMoney, amountHistory.getAfter());
-
     }
 
 }
