@@ -5,6 +5,7 @@ import com.my.application.black.jack.model.Game;
 import com.my.application.black.jack.model.User;
 import com.my.application.black.jack.server.dao.GameRepository;
 import com.my.application.black.jack.server.dao.UserRepository;
+import com.my.application.black.jack.server.exception.GameException;
 import com.my.application.black.jack.server.service.AmountService;
 import com.my.application.black.jack.server.service.CardGenerator;
 import com.my.application.black.jack.server.service.GameServiceImpl;
@@ -87,6 +88,8 @@ public class GameServiceMockTest {
 
         when(userRepository.findByEmail(USER_NAME)).thenReturn(user);
 
+        when(user.getAmount()).thenReturn(new BigDecimal(5000));
+
     }
 
     @Test
@@ -108,6 +111,12 @@ public class GameServiceMockTest {
         verify(game).setCroupierCard1(Card.CLUBS_4);
         verify(amountService).withdrawForNewGame(savedGame);
         verify(gameConverter).convert(savedGame);
+    }
+
+    @Test(expected = GameException.class)
+    public void testGameCreationWithWrongAmount() {
+        BigDecimal rate = new BigDecimal(-100);
+        gameService.createGameForUser(USER_NAME, rate);
     }
 
     @Test

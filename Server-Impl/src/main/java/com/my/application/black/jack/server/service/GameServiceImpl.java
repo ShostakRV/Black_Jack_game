@@ -4,6 +4,7 @@ import com.my.application.black.jack.model.Game;
 import com.my.application.black.jack.model.User;
 import com.my.application.black.jack.server.dao.GameRepository;
 import com.my.application.black.jack.server.dao.UserRepository;
+import com.my.application.black.jack.server.exception.GameException;
 import com.my.application.black.jack.server.service.converter.GameConverter;
 import com.my.application.black.jack.server.service.dto.GameDto;
 import org.apache.commons.lang3.Validate;
@@ -46,7 +47,11 @@ public class GameServiceImpl implements GameService {
         Validate.notNull(user, "User has not been found");
 
         CardGenerator generator = applicationContext.getBean(CardGenerator.class);
-
+        if (user.getAmount().compareTo(rate) < 0) {
+            throw new GameException("Not enough money!");
+        } else if (BigDecimal.ZERO.compareTo(rate) > 0) {
+            throw new GameException("Rate should be more then 0 !");
+        }
         Game game = gameRepository.newEntity();
         game.setUser(user);
         game.setRate(rate);
