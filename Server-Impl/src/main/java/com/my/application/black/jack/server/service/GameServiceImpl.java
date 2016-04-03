@@ -63,4 +63,8 @@ public class GameServiceImpl implements GameService {
         amountService.withdrawForNewGame(game);
         return gameConverter.convert(game);
     }
+
+    public GameDto hitCard(long gameId) {
+        return null;
+    }
 }
