@@ -13,6 +13,7 @@
 
 ##IDEA configs
 <img src ="https://raw.githubusercontent.com/ShostakRV/Black_Jack_game/master/docs/Annotation_processing.jpg" />
+<img src ="https://raw.githubusercontent.com/ShostakRV/Black_Jack_game/master/docs/lombok_plugin.jpg" />
 
 ## Tutorials and useful links
 * [Mockito](http://mockito.org/)
