@@ -1,6 +1,13 @@
-Technology stack:
-Spring(MVC/DATA/)
+##Technology stack:
+* Spring(MVC/DATA/Test ...),
+* Hibernate,
+* AngularJS/TypeScrip,
+* Mockito.
+
+
 
 Authorization credentials:
-username:test@email.com
-password:Password2
+
+| username | password|
+| --- | --- |
+| test@email.com | Password2|
