@@ -3,6 +3,7 @@ package com.my.application.black.jack.run.config.web;
 import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration;
 import org.springframework.context.annotation.*;
 import org.springframework.web.servlet.config.annotation.*;
+import org.thymeleaf.templateresolver.*;
 
 /**
  * Created: Shostak Roman
@@ -15,9 +16,7 @@ public class WebMvcConfig extends WebMvcAutoConfiguration.WebMvcAutoConfiguratio
 
 	private static final String[] CLASSPATH_RESOURCE_LOCATIONS = {
 		"classpath:/META-INF/resources/", "classpath:/resources/",
-		"classpath:/static/", "classpath:/public/", "classpath:/public-resources/",
-		"classpath:/WEB-INF/resources"
-	};
+		"classpath:/static/", "classpath:/public/" };
 
 
 	@Override
@@ -28,22 +27,35 @@ public class WebMvcConfig extends WebMvcAutoConfiguration.WebMvcAutoConfiguratio
 		registry.addViewController( "/login" ).setViewName( "login" );//			8-login-form/8-login-form/index
 	}
 
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-
-		registry.addResourceHandler("/css/**").addResourceLocations("/css/**");
-		registry.addResourceHandler("/img/**").addResourceLocations("/img/**");
-		registry.addResourceHandler("/js/**").addResourceLocations("/js/**");
-		registry.addResourceHandler("/sound/**").addResourceLocations("/sound/**");
-		registry.addResourceHandler("/fonts/**").addResourceLocations("/fonts/**");
+	@Bean
+	public TemplateResolver getTemplateResolver() {
+		ServletContextTemplateResolver resolver = new ServletContextTemplateResolver();
+		resolver.setPrefix( "classpath:/webapp/" );
+		resolver.setSuffix( ".html" );
+		resolver.setTemplateMode( "HTML5" );
+		return resolver;
 	}
 
 
 	@Override
-	public void addInterceptors(InterceptorRegistry registry) { //todo local interceptor: http://www.mkyong.com/spring-mvc/spring-mvc-internationalization-example/
-//		registry.addInterceptor(new LocaleChangeInterceptor());
-//		registry.addInterceptor(new ThemeChangeInterceptor()).addPathPatterns( "/**").excludePathPatterns( "/admin/**");
-//		registry.addInterceptor(new SecurityInterceptor()).addPathPatterns("/secure/*");
+	public void addResourceHandlers( ResourceHandlerRegistry registry ) {
+
+		if (!registry.hasMappingForPattern("/webjars/**")) {
+			registry.addResourceHandler("/webjars/**").addResourceLocations(
+				"classpath:/META-INF/resources/webjars/");
+		}
+		if (!registry.hasMappingForPattern("/**")) {
+			registry.addResourceHandler("/**").addResourceLocations(
+				CLASSPATH_RESOURCE_LOCATIONS);
+		}
+	}
+
+
+	@Override
+	public void addInterceptors( InterceptorRegistry registry ) { //todo local interceptor: http://www.mkyong.com/spring-mvc/spring-mvc-internationalization-example/
+		//		registry.addInterceptor(new LocaleChangeInterceptor());
+		//		registry.addInterceptor(new ThemeChangeInterceptor()).addPathPatterns( "/**").excludePathPatterns( "/admin/**");
+		//		registry.addInterceptor(new SecurityInterceptor()).addPathPatterns("/secure/*");
 	}
 	//    @Override
 
