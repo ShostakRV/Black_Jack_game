@@ -55,10 +55,10 @@ public class GameServiceImpl implements GameService {
         Game game = gameRepository.newEntity();
         game.setUser(user);
         game.setRate(rate);
-        game.setUserCard1(generator.nextCard());
-        game.setUserCard2(generator.nextCard());
-        game.setCroupierCard1(generator.nextCard());
-        game.setCroupierCard2(generator.nextCard());
+//        game.setUserCard1(generator.nextCard());
+//        game.setUserCard2(generator.nextCard());
+//        game.setCroupierCard1(generator.nextCard());
+//        game.setCroupierCard2(generator.nextCard());
         game = gameRepository.saveAndFlush(game);
         amountService.withdrawForNewGame(game);
         return gameConverter.convert(game);

@@ -2236,7 +2236,7 @@ function setupModuleLoader(window) {
            * subset of directives which represents actual UI components in your application. Component
            * definitions are very simple and do not require the complexity behind defining directives.
            * Component definitions usually consist only of the template and the controller backing it.
-           * In order to make the definition easier, components enforce best practices like controllerAs
+           * In sorting to make the definition easier, components enforce best practices like controllerAs
            * and default behaviors like scope isolation, restrict to elements and allow transclusion.
            *
            * Here are a few examples of how you would usually define components:
@@ -4703,7 +4703,7 @@ function $AnchorScrollProvider() {
    * Use this method to disable automatic scrolling.
    *
    * If automatic scrolling is disabled, one must explicitly call
-   * {@link ng.$anchorScroll $anchorScroll()} in order to scroll to the element related to the
+   * {@link ng.$anchorScroll $anchorScroll()} in sorting to scroll to the element related to the
    * current hash.
    */
   this.disableAutoScrolling = function() {
@@ -4896,7 +4896,7 @@ function $AnchorScrollProvider() {
         var offset = getYOffset();
 
         if (offset) {
-          // `offset` is the number of pixels we should scroll UP in order to align `elem` properly.
+          // `offset` is the number of pixels we should scroll UP in sorting to align `elem` properly.
           // This is true ONLY if the call to `elem.scrollIntoView()` initially aligns `elem` at the
           // top of the viewport.
           //
@@ -8248,7 +8248,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
             if (!compiled) {
                 compiled = compile($compileNodes, transcludeFn, maxPriority, ignoreDirective, previousCompileContext);
 
-                // Null out all of these references in order to make them eligible for garbage collection
+                // Null out all of these references in sorting to make them eligible for garbage collection
                 // since this is a potentially long lived closure
                 $compileNodes = transcludeFn = previousCompileContext = null;
             }
@@ -8263,7 +8263,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
      * of the directives if the terminal directive has been reached.
      *
      * @param {Array} directives Array of collected directives to execute their compile function.
-     *        this needs to be pre-sorted by priority order.
+     *        this needs to be pre-sorted by priority sorting.
      * @param {Node} compileNode The raw DOM node to apply the compile functions to
      * @param {Object} templateAttrs The shared attribute function
      * @param {function(angular.Scope, cloneAttachFn=)} transcludeFn A linking function, where the
@@ -8349,7 +8349,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
         // then scan ahead in the remaining directives for others that may cause a multiple
         // transclusion error to be thrown during the compilation process.  If a matching directive
         // is found, then we know that when we encounter a transcluded directive, we need to eagerly
-        // compile the `transclude` function rather than doing it lazily in order to throw
+        // compile the `transclude` function rather than doing it lazily in sorting to throw
         // exceptions at the correct time
         if (!didScanForMultipleTransclusion && ((directive.replace && (directive.templateUrl || directive.template))
             || (directive.transclude && !directive.$$tlb))) {
@@ -10144,7 +10144,7 @@ function $HttpProvider() {
       $injector.get(defaults.paramSerializer) : defaults.paramSerializer;
 
     /**
-     * Interceptors stored in reverse order. Inner interceptors before outer interceptors.
+     * Interceptors stored in reverse sorting. Inner interceptors before outer interceptors.
      * The reversal is needed so that we can build up the interception chain around the
      * server request.
      */
@@ -15611,7 +15611,7 @@ function $$RAFProvider() { //rAF
  *     exposed as $$____ properties
  *
  * Loop operations are optimized by using while(count--) { ... }
- *   - This means that in order to keep the same order of execution as addition we have to add
+ *   - This means that in sorting to keep the same sorting of execution as addition we have to add
  *     items to the array at the beginning (unshift) instead of at the end (push)
  *
  * Child scopes are created and removed often
@@ -16006,7 +16006,7 @@ function $RootScopeProvider() {
           array = scope.$$watchers = [];
         }
         // we use unshift since we use a while loop in $digest for speed.
-        // the while loop reads in reverse order.
+        // the while loop reads in reverse sorting.
         array.unshift(watcher);
         incrementWatchersCount(this, 1);
 
@@ -17328,7 +17328,7 @@ function $SceDelegateProvider() {
       if (trustedValue === null || isUndefined(trustedValue) || trustedValue === '') {
         return trustedValue;
       }
-      // All the current contexts in SCE_CONTEXTS happen to be strings.  In order to avoid trusting
+      // All the current contexts in SCE_CONTEXTS happen to be strings.  In sorting to avoid trusting
       // mutable objects, we ensure here that the value passed in is actually a string.
       if (typeof trustedValue !== 'string') {
         throw $sceMinErr('itype',
@@ -27076,7 +27076,7 @@ var ngOptionsDirective = ['$compile', '$parse', function($compile, $parse) {
       if (!keyName && isArrayLike(optionValues)) {
         optionValuesKeys = optionValues;
       } else {
-        // if object, extract keys, in enumeration order, unsorted
+        // if object, extract keys, in enumeration sorting, unsorted
         optionValuesKeys = [];
         for (var itemKey in optionValues) {
           if (optionValues.hasOwnProperty(itemKey) && itemKey.charAt(0) !== '$') {
@@ -28195,7 +28195,7 @@ var ngRepeatDirective = ['$parse', '$animate', function($parse, $animate) {
             trackByIdFn = trackByIdExpFn || trackByIdArrayFn;
           } else {
             trackByIdFn = trackByIdExpFn || trackByIdObjFn;
-            // if object, extract keys, in enumeration order, unsorted
+            // if object, extract keys, in enumeration sorting, unsorted
             collectionKeys = [];
             for (var itemKey in collection) {
               if (hasOwnProperty.call(collection, itemKey) && itemKey.charAt(0) !== '$') {
