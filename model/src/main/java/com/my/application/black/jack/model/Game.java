@@ -30,22 +30,22 @@ public class Game extends AbstractEntity {
     @NotNull
     @Column(name = "RATE")
     private BigDecimal rate;
-    @NotNull
-    @Column(name = "USER_CARD_1", updatable = false)
-    @Enumerated(EnumType.STRING)
-    private Card userCard1;
-    @NotNull
-    @Column(name = "USER_CARD_2", updatable = false)
-    @Enumerated(EnumType.STRING)
-    private Card userCard2;
-    @NotNull
-    @Column(name = "CROUPIER_CARD_1",updatable = false)
-    @Enumerated(EnumType.STRING)
-    private Card croupierCard1;
-    @NotNull
-    @Column(name = "CROUPIER_CARD_2", updatable = false)
-    @Enumerated(EnumType.STRING)
-    private Card croupierCard2;
+//    @NotNull
+//    @Column(name = "USER_CARD_1", updatable = false)
+//    @Enumerated(EnumType.STRING)
+//    private Card userCard1;
+//    @NotNull
+//    @Column(name = "USER_CARD_2", updatable = false)
+//    @Enumerated(EnumType.STRING)
+//    private Card userCard2;
+//    @NotNull
+//    @Column(name = "CROUPIER_CARD_1",updatable = false)
+//    @Enumerated(EnumType.STRING)
+//    private Card croupierCard1;
+//    @NotNull
+//    @Column(name = "CROUPIER_CARD_2", updatable = false)
+//    @Enumerated(EnumType.STRING)
+//    private Card croupierCard2;
 
     public Game() {
         this.start = LocalDateTime.now();

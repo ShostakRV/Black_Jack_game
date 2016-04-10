@@ -106,9 +106,9 @@ public class GameServiceMockTest {
 
         verify(game).setUser(user);
         verify(game).setRate(rate);
-        verify(game).setUserCard1(Card.CLUBS_2);
-        verify(game).setUserCard2(Card.CLUBS_3);
-        verify(game).setCroupierCard1(Card.CLUBS_4);
+//        verify(game).setUserCard1(Card.CLUBS_2);
+//        verify(game).setUserCard2(Card.CLUBS_3);
+//        verify(game).setCroupierCard1(Card.CLUBS_4);
         verify(amountService).withdrawForNewGame(savedGame);
         verify(gameConverter).convert(savedGame);
     }
