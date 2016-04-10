@@ -8,5 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * Date: 13-Oct-15.
  */
 public interface GameCardRepository extends JpaRepository<GameCard, Long> {
-
+    default GameCard newEntity() {
+        return new GameCard();
+    }
 }

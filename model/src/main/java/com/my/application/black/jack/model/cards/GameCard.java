@@ -2,70 +2,51 @@ package com.my.application.black.jack.model.cards;
 
 import com.my.application.black.jack.model.AbstractEntity;
 import com.my.application.black.jack.model.Card;
-import com.my.application.black.jack.model.Game;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 
 /**
  * Developer: Roman Shostak
  * Date: 12-Oct-15.
  */
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@DiscriminatorColumn(
+//        name = "CARD_TYPE",
+//        discriminatorType = DiscriminatorType.STRING
+//)
+
 @Entity
 @Table(name = "GAME_CARD")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(
-        name = "CARD_TYPE",
-        discriminatorType = DiscriminatorType.STRING
-)
-
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class GameCard extends AbstractEntity {
-    @ManyToOne
-    @JoinColumn(name = "FK_GAME")
-    private Game game;
+    //    @ManyToOne
+//    @JoinColumn(name = "FK_GAME")
+//    private Game game;
+    @NotNull
+    @Column(name = "CARD_TYPE")
+    @Enumerated(EnumType.STRING)
+    protected CardType cardType;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "CARD")
     private Card card;
-    @Column(name = "order")
+
+    @NotNull
+    @Column(name = "ORDER")
     private Integer order;
-    @Column(name = "CARD_TYPE", insertable = false, updatable = false)
-    protected final String cardType;
 
-    protected GameCard(String cardType) {
-        this.cardType = cardType;
+    public GameCard() {
+
     }
 
-    public Game getGame() {
-        return game;
-    }
 
-    public void setGame(Game game) {
-        this.game = game;
-    }
-
-    @Transient
-    public boolean isUserCard() {
-        return this instanceof UserCard;
-    }
-
-    public Card getCard() {
-        return card;
-    }
-
-    public void setCard(Card card) {
-        this.card = card;
-    }
-
-    public Integer getOrder() {
-        return order;
-    }
-
-    public void setOrder(Integer order) {
-        this.order = order;
-    }
-
-    public String getCardType() {
-        return cardType;
+    public enum CardType {
+        USER, CROUPIER
     }
 }

@@ -21,6 +21,7 @@ public class Game extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "FK_USER")
     private User user;
+
     @NotNull
     @Column(name = "START_ON")
     private LocalDateTime start;

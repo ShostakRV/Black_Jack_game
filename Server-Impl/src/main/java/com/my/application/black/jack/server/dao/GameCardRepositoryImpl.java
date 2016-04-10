@@ -11,11 +11,11 @@ import javax.persistence.EntityManager;
  * Created: Shostak Roman
  * Date: 10.04.2016.
  */
-@Repository
-public class GameCardRepositoryImpl extends SimpleJpaRepository<GameCard, Long> implements GameCardRepository {
-
-    @Autowired
-    public GameCardRepositoryImpl( EntityManager entityManager) {
-        super(GameCard.class, entityManager);
-    }
+//@Repository
+public abstract class GameCardRepositoryImpl {//extends SimpleJpaRepository<GameCard, Long> implements GameCardRepository
+//
+//    @Autowired
+//    public GameCardRepositoryImpl( EntityManager entityManager) {
+//        super(GameCard.class, entityManager);
+//    }
 }
