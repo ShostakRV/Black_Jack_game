@@ -62,7 +62,7 @@ public class GameCardDaoTest {
         game.getGameCards().add(card2);
         gameRepository.saveAndFlush(game);
 
-        assertEquals(gameCardRepository.findAll().size(), 2);
+        assertEquals(gameCardRepository.findAll().size(), 6);
 
 
     }

@@ -26,4 +26,9 @@ public class PageController {
 	public ModelAndView testUserInfo() {
 		return new ModelAndView( "userInfo" );
 	}
+
+	@RequestMapping( value = {"/games/blackJackGame"}, method = RequestMethod.GET )
+	public ModelAndView blackJackGame() {
+		return new ModelAndView( "blackJackGame" );
+	}
 }
