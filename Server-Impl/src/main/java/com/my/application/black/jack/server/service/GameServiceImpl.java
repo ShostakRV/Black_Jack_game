@@ -72,7 +72,9 @@ public class GameServiceImpl implements GameService {
         return gameConverter.convert(game);
     }
 
-    public GameDto hitCard(long gameId) {
+    @Override
+    public GameDto hitCard(String requestedUser, long gameId) {
+
         return null;
     }
 }

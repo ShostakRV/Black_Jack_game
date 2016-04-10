@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 public interface GameService {
 
 
-
     GameDto createGameForUser(String userEmail, BigDecimal rate);
+
+    GameDto hitCard(String requestedUser, long gameId);
 }
