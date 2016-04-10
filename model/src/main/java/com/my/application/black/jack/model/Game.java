@@ -15,7 +15,7 @@ import java.util.List;
  * Developer: Roman Shostak
  * Date: 12-Oct-15.
  */
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode( exclude ={"gameCards"}, callSuper = true)
 @Data
 @Entity
 @Table(name = "GAME")

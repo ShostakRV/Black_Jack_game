@@ -8,8 +8,8 @@ import java.util.Collection;
  */
 public class CardGeneratorFactoryImpl implements CardGeneratorFactory {
     public CardGenerator createGenerator(Collection<Integer> existingCards){
-        CardGenerator generator = new  CardGeneratorImpl();
+//        CardGenerator generator = new  CardGeneratorImpl();
 
-        return generator;
+        return null;
     }
 }
