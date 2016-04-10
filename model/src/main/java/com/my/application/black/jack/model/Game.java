@@ -1,5 +1,6 @@
 package com.my.application.black.jack.model;
 
+import com.my.application.black.jack.model.cards.GameCard;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -7,6 +8,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Developer: Roman Shostak
@@ -31,22 +34,15 @@ public class Game extends AbstractEntity {
     @NotNull
     @Column(name = "RATE")
     private BigDecimal rate;
-//    @NotNull
-//    @Column(name = "USER_CARD_1", updatable = false)
-//    @Enumerated(EnumType.STRING)
-//    private Card userCard1;
-//    @NotNull
-//    @Column(name = "USER_CARD_2", updatable = false)
-//    @Enumerated(EnumType.STRING)
-//    private Card userCard2;
-//    @NotNull
-//    @Column(name = "CROUPIER_CARD_1",updatable = false)
-//    @Enumerated(EnumType.STRING)
-//    private Card croupierCard1;
-//    @NotNull
-//    @Column(name = "CROUPIER_CARD_2", updatable = false)
-//    @Enumerated(EnumType.STRING)
-//    private Card croupierCard2;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<GameCard> gameCards = new ArrayList<>();
+
+//    @OneToMany(fetch = FetchType.EAGER, targetEntity = UserCard.class, mappedBy = "id", cascade = CascadeType.ALL)
+//    private List<UserCard> userCards = new ArrayList<>();
+//
+//    @OneToMany(fetch = FetchType.EAGER, targetEntity = CroupierCard.class, mappedBy = "id", cascade = CascadeType.ALL)
+//    private List<CroupierCard> croupierCards = new ArrayList<>();
 
     public Game() {
         this.start = LocalDateTime.now();

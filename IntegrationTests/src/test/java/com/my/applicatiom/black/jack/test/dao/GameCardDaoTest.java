@@ -2,11 +2,15 @@ package com.my.applicatiom.black.jack.test.dao;
 
 import com.my.applicatiom.black.jack.test.config.IntegrationTestConfig;
 import com.my.application.black.jack.model.Card;
-import com.my.application.black.jack.model.User;
-import com.my.application.black.jack.model.cards.GameCard;
+import com.my.application.black.jack.model.Game;
+import com.my.application.black.jack.model.cards.CroupierCard;
+import com.my.application.black.jack.model.cards.UserCard;
 import com.my.application.black.jack.server.config.ServerConfig;
 import com.my.application.black.jack.server.dao.GameCardRepository;
+import com.my.application.black.jack.server.dao.GameRepository;
 import com.my.application.black.jack.server.dao.UserRepository;
+import com.my.application.black.jack.server.service.GameService;
+import com.my.application.black.jack.server.service.dto.GameDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,24 +37,33 @@ public class GameCardDaoTest {
     private GameCardRepository gameCardRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private GameService gameService;
+    @Autowired
+    private GameRepository gameRepository;
 
     @Test
     public void baseCreationTest() {
-        GameCard card1 = new GameCard();
+        GameDto gameDto = gameService.createGameForUser("test@email.com", BigDecimal.ONE);
+        Game game = gameRepository.findOne(gameDto.getId());
+        UserCard card1 = gameCardRepository.newUserCard();
+
         card1.setCard(Card.CLUBS_2);
-        card1.setCardType(GameCard.CardType.USER);
+        card1.setGame(game);
+        card1.setSorting(0);
+
+        game.getGameCards().add(card1);
+        game = gameRepository.saveAndFlush(game);
+        CroupierCard card2 = gameCardRepository.newCroupierCard();
+        card2.setGame(game);
+        card2.setSorting(0);
+        card2.setCard(Card.CLUBS_6);
+
+        game.getGameCards().add(card2);
+        gameRepository.saveAndFlush(game);
+
+        assertEquals(gameCardRepository.findAll().size(), 2);
 
 
-        card1.setOrder(0);
-        gameCardRepository.save(card1);
-        gameCardRepository.findAll();
-    }
-
-    @Test
-    public void test3() {
-        User user = new User("test2@email.com", "$2a$10$x9vXeDsSC2109FZfIJz.pOZ4dJ056xBpbesuMJg3jZ.ThQkV119tS");
-        user.setAmount(new BigDecimal(5000));
-        userRepository.save(user);
-        assertEquals(userRepository.findAll().size(), 2);
     }
 }

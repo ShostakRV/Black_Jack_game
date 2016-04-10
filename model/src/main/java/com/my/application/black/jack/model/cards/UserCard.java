@@ -8,11 +8,12 @@ import javax.persistence.Table;
  * Created: Shostak Roman
  * Date: 10.04.2016.
  */
-//@Entity
-//@Table(name = "GAME_CARD")
-//@DiscriminatorValue(value = "user")
-public class UserCard {//extends GameCard
+@Entity
+@Table(name = "GAME_CARD")
+@DiscriminatorValue(value = "USER")
+public class UserCard extends GameCard {//
+
     public UserCard() {
-//        super("user");
+        super(CardType.USER);
     }
 }
