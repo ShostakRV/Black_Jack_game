@@ -76,7 +76,7 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public GameDto hitCard(String requestedUser, long gameId) {
+    public GameDto hitUserCard(String requestedUser, long gameId) {
         User user = userRepository.findByEmail(requestedUser);
         Game game = gameRepository.findOne(gameId);
 

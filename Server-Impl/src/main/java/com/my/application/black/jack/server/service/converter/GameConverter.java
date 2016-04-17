@@ -21,7 +21,11 @@ public class GameConverter {
             if (card.getCardType() == CardType.USER) {
                 dto.getUserCards().add(card.getCard().toString());
             } else {
-                dto.getCroupierCard().add(card.getCard().toString());
+                if (dto.getCroupierCard().isEmpty()) {
+                    dto.getCroupierCard().add(card.getCard().toString());
+                } else if (game.getFinish() != null) {
+                    dto.getCroupierCard().add(card.getCard().toString());
+                }
             }
         }
         return dto;

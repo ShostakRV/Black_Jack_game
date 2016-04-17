@@ -134,7 +134,7 @@ public class GameServiceMockTest {
     @Test
     public void testGameStep() {
 
-        GameDto gameDto = gameService.hitCard(USER_NAME, 777);
+        GameDto gameDto = gameService.hitUserCard(USER_NAME, 777);
     }
 
     @Test

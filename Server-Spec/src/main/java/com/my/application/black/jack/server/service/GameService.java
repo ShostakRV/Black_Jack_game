@@ -13,7 +13,7 @@ public interface GameService {
 
     GameDto createGameForUser(String userEmail, BigDecimal rate);
 
-    GameDto hitCard(String requestedUser, long gameId);
+    GameDto hitUserCard(String requestedUser, long gameId);
 
     GameDto finishGame(String requestedUser, long gameId);
 }
