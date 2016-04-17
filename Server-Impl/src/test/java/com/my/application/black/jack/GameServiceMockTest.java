@@ -13,6 +13,7 @@ import com.my.application.black.jack.server.service.CardGenerator;
 import com.my.application.black.jack.server.service.GameCardService;
 import com.my.application.black.jack.server.service.GameServiceImpl;
 import com.my.application.black.jack.server.service.converter.GameConverter;
+import com.my.application.black.jack.server.service.dto.GameDto;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,8 +38,8 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class GameServiceMockTest {
 
-    private static final String USER_NAME = "Test";
-    Set<GameCard> generatedCards = new HashSet<>();
+    private static final String USER_NAME = "test@email.com";
+    private Set<GameCard> generatedCards = new HashSet<>();
     @InjectMocks
     private GameServiceImpl gameService;
     @Mock
@@ -132,8 +133,8 @@ public class GameServiceMockTest {
 
     @Test
     public void testGameStep() {
-        //шаг в игре(сдача карты или играко или курупе)
-//        fail("dummy");
+
+        GameDto gameDto = gameService.hitCard(USER_NAME, 777);
     }
 
     @Test

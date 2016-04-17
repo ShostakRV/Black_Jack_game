@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 /**
  * Developer: Roman Shostak
@@ -33,8 +34,10 @@ public class GameServiceImpl implements GameService {
     private GameCardService gameCardService;
 
     @Autowired
-    public GameServiceImpl(GameRepository gameRepository, UserRepository userRepository,
-                           GameConverter gameConverter, AmountService amountService,
+    public GameServiceImpl(GameRepository gameRepository,
+                           UserRepository userRepository,
+                           GameConverter gameConverter,
+                           AmountService amountService,
                            GameCardService gameCardService) {
         this.gameRepository = gameRepository;
         this.userRepository = userRepository;
@@ -48,7 +51,6 @@ public class GameServiceImpl implements GameService {
 
         User user = userRepository.findByEmail(userEmail);
         Validate.notNull(user, "User has not been found");
-
 
         if (user.getAmount().compareTo(rate) < 0) {
             throw new GameException("Not enough money!");
@@ -68,13 +70,29 @@ public class GameServiceImpl implements GameService {
         game.getGameCards().add(croupierCard1);
         game.getGameCards().add(croupierCard2);
         game = gameRepository.saveAndFlush(game);
+
         amountService.withdrawForNewGame(game);
         return gameConverter.convert(game);
     }
 
     @Override
     public GameDto hitCard(String requestedUser, long gameId) {
+        User user = userRepository.findByEmail(requestedUser);
+        Game game = gameRepository.findOne(gameId);
 
+        if (!Objects.equals(game.getUser(), user)) {
+            throw new GameException("WTF? Are you cheater?");
+        }
+
+        CardGenerator cardGenerator = gameCardService.createCardGenerator(game);
+        game.getGameCards().add(cardGenerator.nextUserCard());
+        game = gameRepository.saveAndFlush(game);
+
+        return gameConverter.convert(game);
+    }
+
+    @Override
+    public GameDto finishGame(String requestedUser, long gameId) {
         return null;
     }
 }
