@@ -93,7 +93,7 @@
 		<!--<finalName>Black-Jack</finalName>-->
 		<sourceDirectory>${basedir}\src\main\java</sourceDirectory>
 		<!---->
-		<testSourceDirectory>${basedir}\src\test\java</testSourceDirectory>
+		<!--<testSourceDirectory>${basedir}\src\test\java</testSourceDirectory>-->
 
 		<resources>
 			<!--<include>**/*.properties</include>-->
@@ -101,6 +101,9 @@
 			<!--</resource>-->
 			<resource>
 				<directory>${basedir}/src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>${basedir}/src/main/webapp</directory>
 			</resource>
 		</resources>
 		<plugins>
@@ -114,6 +117,33 @@
 						<goals>
 							<goal>sources</goal>
 						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/classes/</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/resources</directory>
+									<filtering>true</filtering>
+								</resource>
+								<resource>
+									<directory>src/main/webapp</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
