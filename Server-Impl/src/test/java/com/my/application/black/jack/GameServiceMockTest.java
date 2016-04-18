@@ -7,8 +7,7 @@ import com.my.application.black.jack.server.exception.GameException;
 import com.my.application.black.jack.server.service.*;
 import com.my.application.black.jack.server.service.converter.GameConverter;
 import com.my.application.black.jack.server.service.dto.GameDto;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -30,6 +29,7 @@ import static org.mockito.Mockito.when;
 public class GameServiceMockTest {
 
     private static final String USER_NAME = "test@email.com";
+    private static final long GAME_ID = 777L;
     private Set<GameCard> generatedCards = new HashSet<>();
     @InjectMocks
     private GameServiceImpl gameService;
@@ -76,6 +76,9 @@ public class GameServiceMockTest {
 
         when( game.getGameCards() ).thenReturn( gameCards );
 
+        when( game.getUser() ).thenReturn( user );
+
+        when( gameRepository.findOne( GAME_ID )).thenReturn( game );
 
         when(generator.nextUserCard()).then(invocation -> {
             if (generatedCards.size() == 0) {
@@ -130,7 +133,7 @@ public class GameServiceMockTest {
     @Test
     public void testGameStep() {
 
-        GameDto gameDto = gameService.hitUserCard(USER_NAME, 777);
+        GameDto gameDto = gameService.hitUserCard(USER_NAME, 777L);
     }
 
     @Test
