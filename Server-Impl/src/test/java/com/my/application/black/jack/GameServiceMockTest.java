@@ -1,20 +1,31 @@
 package com.my.application.black.jack;
 
-import com.my.application.black.jack.model.*;
-import com.my.application.black.jack.model.cards.*;
-import com.my.application.black.jack.server.dao.*;
+import com.my.application.black.jack.model.Game;
+import com.my.application.black.jack.model.User;
+import com.my.application.black.jack.model.cards.CroupierCard;
+import com.my.application.black.jack.model.cards.GameCard;
+import com.my.application.black.jack.model.cards.UserCard;
+import com.my.application.black.jack.server.dao.GameRepository;
+import com.my.application.black.jack.server.dao.UserRepository;
 import com.my.application.black.jack.server.exception.GameException;
-import com.my.application.black.jack.server.service.*;
+import com.my.application.black.jack.server.service.AmountService;
+import com.my.application.black.jack.server.service.CardGenerator;
+import com.my.application.black.jack.server.service.GameCardService;
+import com.my.application.black.jack.server.service.GameServiceImpl;
 import com.my.application.black.jack.server.service.converter.GameConverter;
 import com.my.application.black.jack.server.service.dto.GameDto;
-import org.junit.*;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.context.ApplicationContext;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
@@ -74,11 +85,11 @@ public class GameServiceMockTest {
 
         when(user.getAmount()).thenReturn(new BigDecimal(5000));
 
-        when( game.getGameCards() ).thenReturn( gameCards );
+        when(game.getGameCards()).thenReturn(gameCards);
 
-        when( game.getUser() ).thenReturn( user );
+        when(game.getUser()).thenReturn(user);
 
-        when( gameRepository.findOne( GAME_ID )).thenReturn( game );
+        when(gameRepository.findOne(GAME_ID)).thenReturn(game);
 
         when(generator.nextUserCard()).then(invocation -> {
             if (generatedCards.size() == 0) {
@@ -87,7 +98,9 @@ public class GameServiceMockTest {
             } else if (generatedCards.size() == 2) {
                 generatedCards.add(userCard2);
                 return userCard2;
-            } else throw new RuntimeException("unexpected call");
+            } else {
+                throw new RuntimeException("unexpected call");
+            }
         });
         when(generator.nextCroupierCard()).then(invocation -> {
             if (generatedCards.size() == 1) {
@@ -96,7 +109,9 @@ public class GameServiceMockTest {
             } else if (generatedCards.size() == 3) {
                 generatedCards.add(croupierCard2);
                 return croupierCard2;
-            } else throw new RuntimeException("unexpected call");
+            } else {
+                throw new RuntimeException("unexpected call");
+            }
         });
     }
 
@@ -130,10 +145,25 @@ public class GameServiceMockTest {
         gameService.createGameForUser(USER_NAME, rate);
     }
 
+    /*
+    Hit card
+    Проверка выдчи карты
+     */
     @Test
     public void testGameStep() {
+        BigDecimal rate = new BigDecimal(100);
+        GameDto gameForUser = gameService.createGameForUser(USER_NAME, rate);
+        verify(game).setUser(user);
+        verify(game).setRate(rate);
+        verify(gameCards).add(userCard1);
+        verify(gameCards).add(userCard2);
+        verify(gameCards).add(croupierCard1);
+        verify(gameCards).add(croupierCard2);
 
-        GameDto gameDto = gameService.hitUserCard(USER_NAME, 777L);
+        verify(gameCards).add(generator.nextUserCard());
+
+        //GameDto gameDto = gameService.hitUserCard(USER_NAME, 777L);
+
     }
 
     @Test

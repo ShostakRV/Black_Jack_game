@@ -49,5 +49,13 @@ public abstract class GameCard extends AbstractEntity {
         this.cardType = cardType;
     }
 
-
+    @Override
+    public String toString() {
+        return "GameCard{" +
+                "cardType=" + cardType +
+                ", game=" + game +
+                ", card=" + card +
+                ", sorting=" + sorting +
+                '}';
+    }
 }
