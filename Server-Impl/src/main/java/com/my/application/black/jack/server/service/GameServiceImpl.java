@@ -1,6 +1,7 @@
 package com.my.application.black.jack.server.service;
 
 import com.my.application.black.jack.model.Game;
+import com.my.application.black.jack.model.GameState;
 import com.my.application.black.jack.model.User;
 import com.my.application.black.jack.model.cards.CroupierCard;
 import com.my.application.black.jack.model.cards.UserCard;
@@ -60,6 +61,7 @@ public class GameServiceImpl implements GameService {
         Game game = gameRepository.newEntity();
         game.setUser(user);
         game.setRate(rate);
+        game.setState(GameState.ON_PROGRESS);
         CardGenerator cardGenerator = gameCardService.createCardGenerator(game);
         UserCard userCard1 = cardGenerator.nextUserCard();
         CroupierCard croupierCard1 = cardGenerator.nextCroupierCard();
@@ -70,6 +72,7 @@ public class GameServiceImpl implements GameService {
         game.getGameCards().add(croupierCard1);
         game.getGameCards().add(croupierCard2);
         game = gameRepository.saveAndFlush(game);
+
 
         amountService.withdrawForNewGame(game);
         return gameConverter.convert(game);

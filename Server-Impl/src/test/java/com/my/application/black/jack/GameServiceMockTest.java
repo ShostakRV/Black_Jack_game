@@ -1,6 +1,7 @@
 package com.my.application.black.jack;
 
 import com.my.application.black.jack.model.Game;
+import com.my.application.black.jack.model.GameState;
 import com.my.application.black.jack.model.User;
 import com.my.application.black.jack.model.cards.CroupierCard;
 import com.my.application.black.jack.model.cards.GameCard;
@@ -129,6 +130,7 @@ public class GameServiceMockTest {
 
         verify(game).setUser(user);
         verify(game).setRate(rate);
+        verify(game).setState(GameState.ON_PROGRESS);
 
         verify(gameCards).add(userCard1);
         verify(gameCards).add(userCard2);
@@ -151,19 +153,10 @@ public class GameServiceMockTest {
      */
     @Test
     public void testGameStep() {
-        BigDecimal rate = new BigDecimal(100);
-        GameDto gameForUser = gameService.createGameForUser(USER_NAME, rate);
-        verify(game).setUser(user);
-        verify(game).setRate(rate);
+
+        gameService.hitUserCard(USER_NAME, GAME_ID);
         verify(gameCards).add(userCard1);
-        verify(gameCards).add(userCard2);
-        verify(gameCards).add(croupierCard1);
-        verify(gameCards).add(croupierCard2);
-
-        verify(gameCards).add(generator.nextUserCard());
-
-        //GameDto gameDto = gameService.hitUserCard(USER_NAME, 777L);
-
+        verify(gameConverter).convert(savedGame);
     }
 
     @Test
