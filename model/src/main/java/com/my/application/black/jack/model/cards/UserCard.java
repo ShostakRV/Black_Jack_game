@@ -1,5 +1,7 @@
 package com.my.application.black.jack.model.cards;
 
+import com.my.application.black.jack.model.Card;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -15,5 +17,10 @@ public class UserCard extends GameCard {//
 
     public UserCard() {
         super(CardType.USER);
+    }
+
+    public UserCard( Card card) {
+        this();
+        this.card = card;
     }
 }

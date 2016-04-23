@@ -21,10 +21,10 @@ public class GameConverter {
             if (card.getCardType() == CardType.USER) {
                 dto.getUserCards().add(card.getCard().toString());
             } else {
-                if (dto.getCroupierCard().isEmpty()) {
-                    dto.getCroupierCard().add(card.getCard().toString());
+                if (dto.getCroupierCards().isEmpty()) {
+                    dto.getCroupierCards().add(card.getCard().toString());
                 } else if (game.getFinish() != null) {
-                    dto.getCroupierCard().add(card.getCard().toString());
+                    dto.getCroupierCards().add(card.getCard().toString());
                 }
             }
         }

@@ -39,7 +39,7 @@ public abstract class GameCard extends AbstractEntity {
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "CARD")
-    private Card card;
+    protected Card card;
 
     @NotNull
     @Column(name = "SORTING")

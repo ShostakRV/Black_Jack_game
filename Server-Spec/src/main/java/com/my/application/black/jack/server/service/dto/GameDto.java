@@ -20,6 +20,6 @@ public class GameDto {
 
     private List<String> userCards = new ArrayList<>();
 
-    private List<String> croupierCard = new ArrayList<>();
+    private List<String> croupierCards = new ArrayList<>();
 
 }
