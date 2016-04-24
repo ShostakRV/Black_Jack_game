@@ -113,7 +113,7 @@ public class GameServiceImpl implements GameService {
 
         int userPointsSum = sumCardPoints(userCards);
         int croupierPointsSum = sumCardPoints(croupierCards);
-        GameState gameResultState;
+        final GameState gameResultState;
         boolean userHasMorePoints = userPointsSum > croupierPointsSum;
         boolean croupierHasMorePoints = userPointsSum < croupierPointsSum;
         if (stand && userHasMorePoints || (userPointsSum == 21 && userHasMorePoints)) {
@@ -183,7 +183,11 @@ public class GameServiceImpl implements GameService {
         CardGenerator cardGenerator = gameCardService.createCardGenerator(game);
         game.getGameCards().add(cardGenerator.nextUserCard());
         game = gameRepository.saveAndFlush(game);
-
+        List<GameCard> userCards = game.getGameCards().stream().filter(gameCard -> gameCard.getCardType() == CardType.USER).collect(Collectors.toList());
+        int userPoints = sumCardPoints(userCards);
+        if(userPoints>=21){
+            game = finishGame(game, true);
+        }
         return gameConverter.convert(game);
     }
 
