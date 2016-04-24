@@ -50,7 +50,7 @@ public class AmountServiceImpl implements AmountService {
     }
 
     @Override
-    public void increaseAmountForWonGame(Game game) {
+    public void proccessAmountForFinishedGame(Game game) {
         User user = game.getUser();
         BigDecimal before = user.getAmount();
         BigDecimal rate = game.getRate();
