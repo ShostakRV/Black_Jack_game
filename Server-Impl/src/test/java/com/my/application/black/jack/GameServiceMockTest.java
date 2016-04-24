@@ -27,7 +27,10 @@ import org.springframework.context.ApplicationContext;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -170,7 +173,6 @@ public class GameServiceMockTest {
 
     @Test
     public void testSumCardPointsForeAces() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-
         gameCards.add(new UserCard(Card.DIAMONDS_ACE));
         gameCards.add(new UserCard(Card.DIAMONDS_ACE));
         gameCards.add(new UserCard(Card.DIAMONDS_ACE));
@@ -178,8 +180,7 @@ public class GameServiceMockTest {
         Method sumCardPoints = GameServiceImpl.class.getDeclaredMethod("sumCardPoints", List.class, CardType.class);
         sumCardPoints.setAccessible(true);
         int res = (int) sumCardPoints.invoke(gameService, gameCards, CardType.USER);
-        assertEquals((11+3), res);
-
+        assertEquals((11 + 3), res);
     }
 
     @Test
@@ -190,5 +191,26 @@ public class GameServiceMockTest {
         sumCardPoints.setAccessible(true);
         int res = (int) sumCardPoints.invoke(gameService, gameCards, CardType.USER);
         assertEquals((22), res);
+    }
+
+    @Test
+    public void testSumCardPointsTest3() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        gameCards.add(new UserCard(Card.DIAMONDS_2));
+        gameCards.add(new UserCard(Card.DIAMONDS_2));
+        gameCards.add(new UserCard(Card.DIAMONDS_2));
+        gameCards.add(new UserCard(Card.DIAMONDS_2));
+        gameCards.add(new UserCard(Card.DIAMONDS_3));
+        gameCards.add(new UserCard(Card.DIAMONDS_3));
+        gameCards.add(new UserCard(Card.DIAMONDS_3));
+        gameCards.add(new UserCard(Card.DIAMONDS_3));
+        gameCards.add(new UserCard(Card.DIAMONDS_4));
+        gameCards.add(new UserCard(Card.DIAMONDS_4));
+        gameCards.add(new UserCard(Card.DIAMONDS_4));
+        gameCards.add(new UserCard(Card.DIAMONDS_4));
+        Method sumCardPoints = GameServiceImpl.class.getDeclaredMethod("sumCardPoints", List.class, CardType.class);
+        sumCardPoints.setAccessible(true);
+        int res = (int) sumCardPoints.invoke(gameService, gameCards, CardType.USER);
+        assertEquals((2 * 4 + 3 * 4 + 4 * 4), res);
+        System.out.println(res);
     }
 }
