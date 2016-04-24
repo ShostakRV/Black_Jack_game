@@ -50,7 +50,7 @@ public class AmountServiceImpl implements AmountService {
 
     @Override
     @Transactional
-    public void processAmountForFinishedGame(Game game) {
+    public void processAmountForFinishedGame(Game game) {// todo make test case
         User user = game.getUser();
         BigDecimal before = user.getAmount();
         BigDecimal rate = game.getRate();

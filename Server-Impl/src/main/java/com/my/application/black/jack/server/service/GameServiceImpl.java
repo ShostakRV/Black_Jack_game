@@ -79,7 +79,7 @@ public class GameServiceImpl implements GameService {
         game = gameRepository.saveAndFlush(game);
         amountService.withdrawForNewGame(game);
 
-        if (userCard1.getCard().getValue() + userCard2.getCard().getValue() == 21) {
+        if (userCard1.getCard().getValue() + userCard2.getCard().getValue() == 21) { // todo make test case
             game = finishGame(game, false);
         }
 
@@ -96,11 +96,6 @@ public class GameServiceImpl implements GameService {
         return game;
     }
 
-
-
-
-
-
     @Override
     public GameDto hitUserCard(String requestedUser, long gameId) {
         User user = userRepository.findByEmail(requestedUser);
@@ -115,14 +110,14 @@ public class GameServiceImpl implements GameService {
         game = gameRepository.saveAndFlush(game);
         List<GameCard> userCards = game.getGameCards().stream().filter(gameCard -> gameCard.getCardType() == CardType.USER).collect(Collectors.toList());
         int userPoints = GameResultUtils.sumCardPoints(userCards);
-        if(userPoints>=21){
+        if (userPoints >= 21) {// todo make test case
             game = finishGame(game, true);
         }
         return gameConverter.convert(game);
     }
 
     @Override
-    public GameDto finishGame(String requestedUser, long gameId) {
+    public GameDto finishGame(String requestedUser, long gameId) {// todo make test case
         User user = userRepository.findByEmail(requestedUser);
         Game game = gameRepository.findOne(gameId);
 
