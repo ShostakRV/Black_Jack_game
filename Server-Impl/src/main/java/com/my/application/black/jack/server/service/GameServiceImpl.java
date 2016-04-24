@@ -1,6 +1,5 @@
 package com.my.application.black.jack.server.service;
 
-import com.my.application.black.jack.model.Card;
 import com.my.application.black.jack.model.Game;
 import com.my.application.black.jack.model.GameState;
 import com.my.application.black.jack.model.User;
@@ -88,7 +87,7 @@ public class GameServiceImpl implements GameService {
     }
 
     private Game finishGame(Game game, boolean stand) {
-        GameResult gameResult = getGameResult(game.getGameCards(), stand);
+        GameResult gameResult = GameResultUtils.getGameResult(game.getGameCards(), stand);
         if (gameResult.getGameState() != GameState.ON_PROGRESS || stand) {
             game.setState(gameResult.getGameState());
             game = gameRepository.saveAndFlush(game);
@@ -97,79 +96,10 @@ public class GameServiceImpl implements GameService {
         return game;
     }
 
-    private GameResult getGameResult(List<GameCard> gameCards, boolean stand) {
-        GameResult gameResult = new GameResult();
-        List<GameCard> userCards = gameCards.stream()
-                .filter(card -> card.getCardType() == CardType.USER)
-                .collect(Collectors.toList());
-
-        List<GameCard> croupierCards = gameCards.stream()
-                .filter(card -> card.getCardType() == CardType.CROUPIER)
-                .collect(Collectors.toList());
-
-        if (userCards.isEmpty()) {
-            throw new GameException("Something goes wrong! Can not calculate points sum.");
-        }
-
-        int userPointsSum = sumCardPoints(userCards);
-        int croupierPointsSum = sumCardPoints(croupierCards);
-        final GameState gameResultState;
-        boolean userHasMorePoints = userPointsSum > croupierPointsSum;
-        boolean croupierHasMorePoints = userPointsSum < croupierPointsSum;
-        if (stand && userHasMorePoints || (userPointsSum == 21 && userHasMorePoints)) {
-            if (userCards.size() == 2) {
-                gameResultState = GameState.USER_BLACK_JACK;
-            } else {
-                gameResultState = GameState.USER_WIN;
-            }
-        } else if (stand && croupierHasMorePoints) {
-            if (croupierCards.size() == 2 && croupierPointsSum == 21) {
-                gameResultState = GameState.CROUPIER_BLACK_JACK;
-            } else {
-                gameResultState = GameState.USER_LOSE;
-            }
-        } else if ((stand && userPointsSum == croupierPointsSum) || userPointsSum == 21) {
-            if (userCards.size() == 2 && croupierCards.size() == 2) {
-                gameResultState = GameState.DEAD_HEAT;
-            } else if (userCards.size() == 2) {
-                gameResultState = GameState.USER_BLACK_JACK;
-            } else if (stand && croupierCards.size() == 2) {
-                gameResultState = GameState.CROUPIER_BLACK_JACK;
-            } else {
-                gameResultState = GameState.DEAD_HEAT;
-            }
-        } else {
-            gameResultState = GameState.ON_PROGRESS;
-        }
-
-        gameResult.setGameState(gameResultState);
-        return gameResult;
-    }
 
 
-    private int sumCardPoints(List<GameCard> gameCards) {
-        List<Card> targetCards = gameCards.stream()
-                .map(GameCard::getCard)
-                .collect(Collectors.toList());
-        if (targetCards.isEmpty()) {
-            throw new GameException("Something goes wrong! Can not calculate points sum.");
-        }
-        int aceCount = 0;
-        int sum = 0;
-        for (Card card : targetCards) {
-            if (card.isAce()) {
-                aceCount++;
-            }
-            sum += card.getValue();
-            if (sum > 21 && gameCards.size() != 2) {
-                while (sum > 21 && aceCount != 0) {
-                    sum -= 10;
-                    aceCount--;
-                }
-            }
-        }
-        return sum;
-    }
+
+
 
     @Override
     public GameDto hitUserCard(String requestedUser, long gameId) {
@@ -184,7 +114,7 @@ public class GameServiceImpl implements GameService {
         game.getGameCards().add(cardGenerator.nextUserCard());
         game = gameRepository.saveAndFlush(game);
         List<GameCard> userCards = game.getGameCards().stream().filter(gameCard -> gameCard.getCardType() == CardType.USER).collect(Collectors.toList());
-        int userPoints = sumCardPoints(userCards);
+        int userPoints = GameResultUtils.sumCardPoints(userCards);
         if(userPoints>=21){
             game = finishGame(game, true);
         }
