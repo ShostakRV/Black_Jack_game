@@ -1,8 +1,10 @@
 package com.my.application.black.jack;
 
+import com.my.application.black.jack.model.Card;
 import com.my.application.black.jack.model.Game;
 import com.my.application.black.jack.model.GameState;
 import com.my.application.black.jack.model.User;
+import com.my.application.black.jack.model.cards.CardType;
 import com.my.application.black.jack.model.cards.CroupierCard;
 import com.my.application.black.jack.model.cards.GameCard;
 import com.my.application.black.jack.model.cards.UserCard;
@@ -22,6 +24,8 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.context.ApplicationContext;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -63,14 +67,14 @@ public class GameServiceMockTest {
     private AmountService amountService;
     @Mock
     private GameCardService gameCardService;
-    @Mock
-    private UserCard userCard1;
-    @Mock
-    private UserCard userCard2;
-    @Mock
-    private CroupierCard croupierCard1;
-    @Mock
-    private CroupierCard croupierCard2;
+
+    private UserCard userCard1 = new UserCard(Card.CLUBS_ACE);
+
+    private UserCard userCard2 = new UserCard(Card.CLUBS_6);
+
+    private CroupierCard croupierCard1 = new CroupierCard(Card.CLUBS_2);
+
+    private CroupierCard croupierCard2 = new CroupierCard(Card.CLUBS_3);
 
     private List<GameCard> gameCards = new ArrayList<>();
 
@@ -78,6 +82,8 @@ public class GameServiceMockTest {
     public void init() {
         when(gameRepository.saveAndFlush(game)).thenReturn(savedGame);
         when(gameRepository.newEntity()).thenReturn(game);
+
+        when(savedGame.getGameCards()).thenReturn(gameCards);
 
         when(gameCardService.createCardGenerator(game)).thenReturn(generator);
         when(userRepository.findByEmail(USER_NAME)).thenReturn(user);
@@ -130,11 +136,11 @@ public class GameServiceMockTest {
         verify(game).setRate(rate);
         verify(game).setState(GameState.ON_PROGRESS);
 
-        assertEquals(gameCards.size(), 4);
-        assertEquals(gameCards.get(0), userCard1);
-        assertEquals(gameCards.get(1), userCard2);
-        assertEquals(gameCards.get(2), croupierCard1);
-        assertEquals(gameCards.get(3), croupierCard2);
+        assertEquals(4, gameCards.size());
+        assertEquals(userCard1, gameCards.get(0));
+        assertEquals(userCard2, gameCards.get(1));
+        assertEquals(croupierCard1, gameCards.get(2));
+        assertEquals(croupierCard2, gameCards.get(3));
 
         verify(amountService).withdrawForNewGame(savedGame);
         verify(gameConverter).convert(savedGame);
@@ -150,8 +156,8 @@ public class GameServiceMockTest {
     public void testGameStep() {
 
         gameService.hitUserCard(USER_NAME, GAME_ID);
-        assertEquals(gameCards.size(), 1);
-        assertEquals(gameCards.get(0), userCard1);
+        assertEquals(1, gameCards.size());
+        assertEquals(userCard1, gameCards.get(0));
         verify(gameRepository).saveAndFlush(game);
         verify(gameConverter).convert(savedGame);
     }
@@ -160,5 +166,29 @@ public class GameServiceMockTest {
     public void testGameEnd() {
         //Закрытие игры и провод транзакций
 //        fail("dummy");
+    }
+
+    @Test
+    public void testSumCardPointsForeAces() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+
+        gameCards.add(new UserCard(Card.DIAMONDS_ACE));
+        gameCards.add(new UserCard(Card.DIAMONDS_ACE));
+        gameCards.add(new UserCard(Card.DIAMONDS_ACE));
+        gameCards.add(new UserCard(Card.DIAMONDS_ACE));
+        Method sumCardPoints = GameServiceImpl.class.getDeclaredMethod("sumCardPoints", List.class, CardType.class);
+        sumCardPoints.setAccessible(true);
+        int res = (int) sumCardPoints.invoke(gameService, gameCards, CardType.USER);
+        assertEquals((11+3), res);
+
+    }
+
+    @Test
+    public void testSumCardPointsTwoAces() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        gameCards.add(new UserCard(Card.DIAMONDS_ACE));
+        gameCards.add(new UserCard(Card.DIAMONDS_ACE));
+        Method sumCardPoints = GameServiceImpl.class.getDeclaredMethod("sumCardPoints", List.class, CardType.class);
+        sumCardPoints.setAccessible(true);
+        int res = (int) sumCardPoints.invoke(gameService, gameCards, CardType.USER);
+        assertEquals((22), res);
     }
 }
