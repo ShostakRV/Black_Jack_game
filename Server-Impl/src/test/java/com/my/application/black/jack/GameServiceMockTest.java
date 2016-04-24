@@ -14,7 +14,6 @@ import com.my.application.black.jack.server.service.CardGenerator;
 import com.my.application.black.jack.server.service.GameCardService;
 import com.my.application.black.jack.server.service.GameServiceImpl;
 import com.my.application.black.jack.server.service.converter.GameConverter;
-import com.my.application.black.jack.server.service.dto.GameDto;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,10 +23,9 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.context.ApplicationContext;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -73,8 +71,8 @@ public class GameServiceMockTest {
     private CroupierCard croupierCard1;
     @Mock
     private CroupierCard croupierCard2;
-    @Mock
-    private List<GameCard> gameCards;
+
+    private List<GameCard> gameCards = new ArrayList<>();
 
     @Before
     public void init() {
@@ -132,10 +130,11 @@ public class GameServiceMockTest {
         verify(game).setRate(rate);
         verify(game).setState(GameState.ON_PROGRESS);
 
-        verify(gameCards).add(userCard1);
-        verify(gameCards).add(userCard2);
-        verify(gameCards).add(croupierCard1);
-        verify(gameCards).add(croupierCard2);
+        assertEquals(gameCards.size(), 4);
+        assertEquals(gameCards.get(0), userCard1);
+        assertEquals(gameCards.get(1), userCard2);
+        assertEquals(gameCards.get(2), croupierCard1);
+        assertEquals(gameCards.get(3), croupierCard2);
 
         verify(amountService).withdrawForNewGame(savedGame);
         verify(gameConverter).convert(savedGame);
@@ -155,7 +154,8 @@ public class GameServiceMockTest {
     public void testGameStep() {
 
         gameService.hitUserCard(USER_NAME, GAME_ID);
-        verify(gameCards).add(userCard1);
+        assertEquals(gameCards.size(), 1);
+        assertEquals(gameCards.get(0), userCard1);
         verify(gameRepository).saveAndFlush(game);
         verify(gameConverter).convert(savedGame);
     }
