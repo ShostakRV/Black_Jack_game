@@ -35,7 +35,7 @@ class GameResultUtils {
         boolean userHasMorePoints = userPointsSum > croupierPointsSum;
         boolean croupierHasMorePoints = userPointsSum < croupierPointsSum;
         if (stand && userHasMorePoints || (userPointsSum == 21 && userHasMorePoints)) {
-            if (userCards.size() == 2) {
+            if (userCards.size() == 2 && userPointsSum == 21) {
                 gameResultState = GameState.USER_BLACK_JACK;
             } else {
                 gameResultState = GameState.USER_WIN;
