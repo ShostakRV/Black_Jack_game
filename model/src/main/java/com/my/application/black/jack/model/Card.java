@@ -23,7 +23,7 @@ public enum Card {
     SPADES_JACK(10, false), CLUBS_JACK(10, false), HEARTS_JACK(10, false), DIAMONDS_JACK(10, false),
     SPADES_QUEEN(10, false), CLUBS_QUEEN(10, false), HEARTS_QUEEN(10, false), DIAMONDS_QUEEN(10, false),
     SPADES_KING(10, false), CLUBS_KING(10, false), HEARTS_KING(10, false), DIAMONDS_KING(10, false),
-    SPADES_ACE(11, false), CLUBS_ACE(11, false), HEARTS_ACE(11, false), DIAMONDS_ACE(11, false);
+    SPADES_ACE(11, true), CLUBS_ACE(11, true), HEARTS_ACE(11, true), DIAMONDS_ACE(11, true);
 
     private static final Map<Integer, Card> cache;
 

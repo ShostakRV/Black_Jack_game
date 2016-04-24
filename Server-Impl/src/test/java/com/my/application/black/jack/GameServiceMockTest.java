@@ -146,10 +146,6 @@ public class GameServiceMockTest {
         gameService.createGameForUser(USER_NAME, rate);
     }
 
-    /*
-    Hit card
-    Проверка выдчи карты
-     */
     @Test
     public void testGameStep() {
 
