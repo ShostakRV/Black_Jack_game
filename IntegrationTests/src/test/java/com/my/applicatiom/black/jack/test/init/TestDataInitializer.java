@@ -44,6 +44,7 @@ public class TestDataInitializer {
         User user = new User("test@email.com", "$2a$10$x9vXeDsSC2109FZfIJz.pOZ4dJ056xBpbesuMJg3jZ.ThQkV119tS");
         user.setAmount(new BigDecimal(5000));
         session.persist(user);
+        // todo make test data like game, amount history.... and so on...  for integration tests
 //        Game game = new Game();
 //        game.setUser(user);
 //        game.setRate(BigDecimal.ONE);
