@@ -1,5 +1,7 @@
 package com.my.application.black.jack.model;
 
+import lombok.Getter;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,21 +11,22 @@ import java.util.Map;
  * Date: 12-Oct-15.
  */
 public enum Card {
-    SPADES_2(2), CLUBS_2(2), HEARTS_2(2), DIAMONDS_2(2),
-    SPADES_3(3), CLUBS_3(3), HEARTS_3(3), DIAMONDS_3(3),
-    SPADES_4(4), CLUBS_4(4), HEARTS_4(4), DIAMONDS_4(4),
-    SPADES_5(5), CLUBS_5(5), HEARTS_5(5), DIAMONDS_5(5),
-    SPADES_6(6), CLUBS_6(6), HEARTS_6(6), DIAMONDS_6(6),
-    SPADES_7(7), CLUBS_7(7), HEARTS_7(7), DIAMONDS_7(7),
-    SPADES_8(8), CLUBS_8(8), HEARTS_8(8), DIAMONDS_8(8),
-    SPADES_9(9), CLUBS_9(9), HEARTS_9(9), DIAMONDS_9(9),
-    SPADES_10(10), CLUBS_10(10), HEARTS_10(10), DIAMONDS_10(10),
-    SPADES_JACK(10), CLUBS_JACK(10), HEARTS_JACK(10), DIAMONDS_JACK(10),
-    SPADES_QUEEN(10), CLUBS_QUEEN(10), HEARTS_QUEEN(10), DIAMONDS_QUEEN(10),
-    SPADES_KING(10), CLUBS_KING(10), HEARTS_KING(10), DIAMONDS_KING(10),
-    SPADES_ACE(11), CLUBS_ACE(11), HEARTS_ACE(11), DIAMONDS_ACE(11);
+    SPADES_2(2, false), CLUBS_2(2, false), HEARTS_2(2, false), DIAMONDS_2(2, false),
+    SPADES_3(3, false), CLUBS_3(3, false), HEARTS_3(3, false), DIAMONDS_3(3, false),
+    SPADES_4(4, false), CLUBS_4(4, false), HEARTS_4(4, false), DIAMONDS_4(4, false),
+    SPADES_5(5, false), CLUBS_5(5, false), HEARTS_5(5, false), DIAMONDS_5(5, false),
+    SPADES_6(6, false), CLUBS_6(6, false), HEARTS_6(6, false), DIAMONDS_6(6, false),
+    SPADES_7(7, false), CLUBS_7(7, false), HEARTS_7(7, false), DIAMONDS_7(7, false),
+    SPADES_8(8, false), CLUBS_8(8, false), HEARTS_8(8, false), DIAMONDS_8(8, false),
+    SPADES_9(9, false), CLUBS_9(9, false), HEARTS_9(9, false), DIAMONDS_9(9, false),
+    SPADES_10(10, false), CLUBS_10(10, false), HEARTS_10(10, false), DIAMONDS_10(10, false),
+    SPADES_JACK(10, false), CLUBS_JACK(10, false), HEARTS_JACK(10, false), DIAMONDS_JACK(10, false),
+    SPADES_QUEEN(10, false), CLUBS_QUEEN(10, false), HEARTS_QUEEN(10, false), DIAMONDS_QUEEN(10, false),
+    SPADES_KING(10, false), CLUBS_KING(10, false), HEARTS_KING(10, false), DIAMONDS_KING(10, false),
+    SPADES_ACE(11, false), CLUBS_ACE(11, false), HEARTS_ACE(11, false), DIAMONDS_ACE(11, false);
 
     private static final Map<Integer, Card> cache;
+
 
     static {
         Map<Integer, Card> tmpCache = new HashMap<>();
@@ -33,18 +36,18 @@ public enum Card {
         cache = Collections.unmodifiableMap(tmpCache);
     }
 
+    @Getter
     private final int value;
+    @Getter
+    private final boolean ace;
 
 
-    Card(int value) {
+    Card(int value, boolean ace) {
         this.value = value;
+        this.ace = ace;
     }
 
     public static Card getByOrdinal(Integer randomBall) {
         return cache.get(randomBall);
-    }
-
-    public int getValue() {
-        return value;
     }
 }
