@@ -178,9 +178,9 @@ public class GameServiceMockTest {
         gameCards.add(new UserCard(Card.DIAMONDS_ACE));
         gameCards.add(new UserCard(Card.DIAMONDS_ACE));
         gameCards.add(new UserCard(Card.DIAMONDS_ACE));
-        Method sumCardPoints = GameServiceImpl.class.getDeclaredMethod("sumCardPoints", List.class, CardType.class);
+        Method sumCardPoints = GameServiceImpl.class.getDeclaredMethod("sumCardPoints", List.class);
         sumCardPoints.setAccessible(true);
-        int res = (int) sumCardPoints.invoke(gameService, gameCards, CardType.USER);
+        int res = (int) sumCardPoints.invoke(gameService, gameCards);
         assertEquals((11 + 3), res);
     }
 
@@ -188,9 +188,9 @@ public class GameServiceMockTest {
     public void testSumCardPointsTwoAces() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         gameCards.add(new UserCard(Card.DIAMONDS_ACE));
         gameCards.add(new UserCard(Card.DIAMONDS_ACE));
-        Method sumCardPoints = GameServiceImpl.class.getDeclaredMethod("sumCardPoints", List.class, CardType.class);
+        Method sumCardPoints = GameServiceImpl.class.getDeclaredMethod("sumCardPoints", List.class);
         sumCardPoints.setAccessible(true);
-        int res = (int) sumCardPoints.invoke(gameService, gameCards, CardType.USER);
+        int res = (int) sumCardPoints.invoke(gameService, gameCards);
         assertEquals((22), res);
     }
 
@@ -208,9 +208,9 @@ public class GameServiceMockTest {
         gameCards.add(new UserCard(Card.DIAMONDS_4));
         gameCards.add(new UserCard(Card.DIAMONDS_4));
         gameCards.add(new UserCard(Card.DIAMONDS_4));
-        Method sumCardPoints = GameServiceImpl.class.getDeclaredMethod("sumCardPoints", List.class, CardType.class);
+        Method sumCardPoints = GameServiceImpl.class.getDeclaredMethod("sumCardPoints", List.class);
         sumCardPoints.setAccessible(true);
-        int res = (int) sumCardPoints.invoke(gameService, gameCards, CardType.USER);
+        int res = (int) sumCardPoints.invoke(gameService, gameCards);
         assertEquals((2 * 4 + 3 * 4 + 4 * 4), res);
         System.out.println(res);
     }
