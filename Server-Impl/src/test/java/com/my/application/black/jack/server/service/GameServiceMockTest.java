@@ -1,20 +1,15 @@
-package com.my.application.black.jack;
+package com.my.application.black.jack.server.service;
 
 import com.my.application.black.jack.model.Card;
 import com.my.application.black.jack.model.Game;
 import com.my.application.black.jack.model.GameState;
 import com.my.application.black.jack.model.User;
-import com.my.application.black.jack.model.cards.CardType;
 import com.my.application.black.jack.model.cards.CroupierCard;
 import com.my.application.black.jack.model.cards.GameCard;
 import com.my.application.black.jack.model.cards.UserCard;
 import com.my.application.black.jack.server.dao.GameRepository;
 import com.my.application.black.jack.server.dao.UserRepository;
 import com.my.application.black.jack.server.exception.GameException;
-import com.my.application.black.jack.server.service.AmountService;
-import com.my.application.black.jack.server.service.CardGenerator;
-import com.my.application.black.jack.server.service.GameCardService;
-import com.my.application.black.jack.server.service.GameServiceImpl;
 import com.my.application.black.jack.server.service.converter.GameConverter;
 import org.junit.Before;
 import org.junit.Test;

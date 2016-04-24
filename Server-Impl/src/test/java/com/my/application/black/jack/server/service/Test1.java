@@ -1,4 +1,4 @@
-package com.my.application.black.jack;
+package com.my.application.black.jack.server.service;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
