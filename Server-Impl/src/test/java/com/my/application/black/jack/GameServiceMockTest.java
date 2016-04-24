@@ -156,6 +156,7 @@ public class GameServiceMockTest {
 
         gameService.hitUserCard(USER_NAME, GAME_ID);
         verify(gameCards).add(userCard1);
+        verify(gameRepository).saveAndFlush(game);
         verify(gameConverter).convert(savedGame);
     }
 
