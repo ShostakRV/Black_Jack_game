@@ -24,7 +24,7 @@ public class TestRestController {
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String helloWorld() {
-        return "HelloWorld! User name: " + SecurityContextHolder.getContext().getAuthentication().getName();
+        return "HelloWorld!!! User name: " + SecurityContextHolder.getContext().getAuthentication().getName();
     }
 
     @RequestMapping(value = "/testDto", method = RequestMethod.GET)

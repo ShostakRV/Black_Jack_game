@@ -14,19 +14,19 @@ import org.springframework.boot.context.web.SpringBootServletInitializer;
  * Date: 08-Oct-15.
  */
 
-@SpringBootApplication( scanBasePackageClasses = {
-	ServerConfig.class, WebMvcConfig.class, AppSecurityConfig.class, TestConfig.class
-} )
+@SpringBootApplication(scanBasePackageClasses = {
+        ServerConfig.class, WebMvcConfig.class, AppSecurityConfig.class, TestConfig.class
+})
 public class BlackJackWebApplication extends SpringBootServletInitializer {
 
-	public static void main( String[] args ) {
-		//TODO run with: --spring.profiles.active=test
-		SpringApplication.run( BlackJackWebApplication.class, "--spring.profiles.active=test" );
-	}
+    public static void main(String[] args) {
+        //TODO run with: --spring.profiles.active=test
+        SpringApplication.run(BlackJackWebApplication.class, args);
+    }
 
-	@Override
-	protected SpringApplicationBuilder configure( SpringApplicationBuilder application ) {
-		application.profiles( "test" );
-		return application.sources( BlackJackWebApplication.class );
-	}
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        application.profiles("test");
+        return application.sources(BlackJackWebApplication.class);
+    }
 }
