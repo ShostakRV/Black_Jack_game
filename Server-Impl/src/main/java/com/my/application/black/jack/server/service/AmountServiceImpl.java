@@ -1,15 +1,14 @@
 package com.my.application.black.jack.server.service;
 
-import com.my.application.black.jack.model.AmountHistory;
-import com.my.application.black.jack.model.AmountSource;
-import com.my.application.black.jack.model.Game;
-import com.my.application.black.jack.model.User;
+import com.my.application.black.jack.model.*;
 import com.my.application.black.jack.server.dao.AmountHistoryRepository;
 import com.my.application.black.jack.server.dao.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 
 /**
@@ -50,19 +49,31 @@ public class AmountServiceImpl implements AmountService {
     }
 
     @Override
-    public void proccessAmountForFinishedGame(Game game) {
+    @Transactional
+    public void processAmountForFinishedGame(Game game) {
         User user = game.getUser();
         BigDecimal before = user.getAmount();
         BigDecimal rate = game.getRate();
-        BigDecimal after = before.add(rate.multiply(new BigDecimal(2)));
+        BigDecimal increaseValue;
+        GameState gameState = game.getState();
+        if (gameState == GameState.USER_WIN) {
+            increaseValue = rate.multiply(new BigDecimal(2));
+        } else if (gameState == GameState.USER_BLACK_JACK) {
+            increaseValue = rate.add(rate.multiply(new BigDecimal(1.5)));
+        } else if (gameState == GameState.DEAD_HEAT) {
+            increaseValue = rate.add(rate);
+        } else {
+            increaseValue = BigDecimal.ZERO;
+        }
 
-        logAmountChangeForUser(game, before, after);
+        BigDecimal after = before.add(increaseValue);
+        if (!Objects.equals(increaseValue, BigDecimal.ZERO)) {
+            logAmountChangeForUser(game, before, after);
 
-        user.setAmount(after);
+            user.setAmount(after);
 
-        userRepository.save(user);
-
-
+            userRepository.save(user);
+        }
     }
 
 

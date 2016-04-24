@@ -11,5 +11,5 @@ public interface AmountService {
 
     void withdrawForNewGame(Game game);
 
-    void proccessAmountForFinishedGame(Game game);
+    void processAmountForFinishedGame(Game game);
 }

@@ -92,7 +92,7 @@ public class GameServiceImpl implements GameService {
         if (gameResult.getGameState() != GameState.ON_PROGRESS || stand) {
             game.setState(gameResult.getGameState());
             game = gameRepository.saveAndFlush(game);
-            amountService.proccessAmountForFinishedGame(game);
+            amountService.processAmountForFinishedGame(game);
         }
         return game;
     }
