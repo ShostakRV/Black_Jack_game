@@ -28,7 +28,7 @@ public class TestRestController {
     }
 
     @RequestMapping(value = "/testDto", method = RequestMethod.GET)
-    public SomeDto testDto(@RequestParam(value = "name") String name) {
+    public SomeDto testDto(@RequestParam(value = "name", defaultValue = "defaultName") String name) {
         return new SomeDto(1, name, "Some default");
     }
 
