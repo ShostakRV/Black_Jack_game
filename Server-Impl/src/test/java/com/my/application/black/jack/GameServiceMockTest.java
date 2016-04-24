@@ -84,6 +84,7 @@ public class GameServiceMockTest {
     @Before
     public void init() {
         when(gameRepository.saveAndFlush(game)).thenReturn(savedGame);
+
         when(gameRepository.newEntity()).thenReturn(game);
 
         when(savedGame.getGameCards()).thenReturn(gameCards);

@@ -33,16 +33,37 @@ public class AmountServiceImpl implements AmountService {
         BigDecimal rate = game.getRate();
         BigDecimal before = user.getAmount();
         BigDecimal after = before.subtract(rate);
+        logAmountChangeForUser(game, before, after);
+        user.setAmount(after);
+        userRepository.saveAndFlush(user);
+
+    }
+
+    private void logAmountChangeForUser(Game game, BigDecimal before, BigDecimal after) {
         AmountHistory amountHistory = amountHistoryRepository.newEntity();
-        amountHistory.setUser(user);
+        amountHistory.setUser(game.getUser());
         amountHistory.setBefore(before);
         amountHistory.setAfter(after);
         amountHistory.setSource(AmountSource.GAME);
         amountHistory.setGame(game);
+        amountHistoryRepository.saveAndFlush(amountHistory);
+    }
+
+    @Override
+    public void increaseAmountForWonGame(Game game) {
+        User user = game.getUser();
+        BigDecimal before = user.getAmount();
+        BigDecimal rate = game.getRate();
+        BigDecimal after = before.add(rate.multiply(new BigDecimal(2)));
+
+        logAmountChangeForUser(game, before, after);
 
         user.setAmount(after);
-        userRepository.saveAndFlush(user);
-        amountHistoryRepository.saveAndFlush(amountHistory);
+
+        userRepository.save(user);
+
 
     }
+
+
 }

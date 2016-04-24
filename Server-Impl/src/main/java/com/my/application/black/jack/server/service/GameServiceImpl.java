@@ -13,6 +13,7 @@ import com.my.application.black.jack.server.dao.UserRepository;
 import com.my.application.black.jack.server.exception.GameException;
 import com.my.application.black.jack.server.service.converter.GameConverter;
 import com.my.application.black.jack.server.service.dto.GameDto;
+import com.my.application.black.jack.server.service.dto.GameResult;
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -77,27 +78,75 @@ public class GameServiceImpl implements GameService {
         game.getGameCards().add(croupierCard1);
         game.getGameCards().add(croupierCard2);
         game = gameRepository.saveAndFlush(game);
+        amountService.withdrawForNewGame(game);
 
-        int pointsSum = sumCardPoints(game.getGameCards(), CardType.USER);
-
-        if (pointsSum == 21) {
-            game.setState(GameState.USER_BLACK_JACK);
-            game = this.finishGame(game);
+        if (userCard1.getCard().getValue() + userCard2.getCard().getValue() == 21) {
+            game = finishGame(game, false);
         }
 
-
-        amountService.withdrawForNewGame(game);
         return gameConverter.convert(game);
     }
 
-    private Game finishGame(Game game) {
-
+    private Game finishGame(Game game, boolean stand) {
+        GameResult gameResult = getGameResult(game.getGameCards(), stand);
+        if (gameResult.getGameState() != GameState.ON_PROGRESS) {
+            amountService.increaseAmountForWonGame(game);
+        }
         return game;
     }
 
-    private int sumCardPoints(List<GameCard> gameCards, CardType type) {
+    private GameResult getGameResult(List<GameCard> gameCards, boolean stand) {
+        GameResult gameResult = new GameResult();
+        List<GameCard> userCards = gameCards.stream()
+                .filter(card -> card.getCardType() == CardType.USER)
+                .collect(Collectors.toList());
+
+        List<GameCard> croupierCards = gameCards.stream()
+                .filter(card -> card.getCardType() == CardType.CROUPIER)
+                .collect(Collectors.toList());
+
+        if (userCards.isEmpty()) {
+            throw new GameException("Something goes wrong! Can not calculate points sum.");
+        }
+
+        int userPointsSum = sumCardPoints(userCards);
+        int croupierPointsSum = sumCardPoints(croupierCards);
+        GameState gameResultState;
+        boolean userHasMorePoints = userPointsSum > croupierPointsSum;
+        boolean croupierHasMorePoints = userPointsSum < croupierPointsSum;
+        if (stand && userHasMorePoints || (userPointsSum == 21 && userHasMorePoints)) {
+            if (userCards.size() == 2) {
+                gameResultState = GameState.USER_BLACK_JACK;
+            } else {
+                gameResultState = GameState.USER_WIN;
+            }
+        } else if (stand && croupierHasMorePoints) {
+            if (croupierCards.size() == 2 && croupierPointsSum == 21) {
+                gameResultState = GameState.CROUPIER_BLACK_JACK;
+            } else {
+                gameResultState = GameState.USER_LOSE;
+            }
+        } else if ((stand && userPointsSum == croupierPointsSum) || userPointsSum == 21) {
+            if (userCards.size() == 2 && croupierCards.size() == 2) {
+                gameResultState = GameState.DEAD_HEAT;
+            } else if (userCards.size() == 2) {
+                gameResultState = GameState.USER_BLACK_JACK;
+            } else if (stand && croupierCards.size() == 2) {
+                gameResultState = GameState.CROUPIER_BLACK_JACK;
+            } else {
+                gameResultState = GameState.DEAD_HEAT;
+            }
+        } else {
+            gameResultState = GameState.ON_PROGRESS;
+        }
+
+        gameResult.setGameState(gameResultState);
+        return gameResult;
+    }
+
+
+    private int sumCardPoints(List<GameCard> gameCards) {
         List<Card> targetCards = gameCards.stream()
-                .filter(card -> card.getCardType() == type)
                 .map(GameCard::getCard)
                 .collect(Collectors.toList());
         if (targetCards.isEmpty()) {
@@ -145,7 +194,7 @@ public class GameServiceImpl implements GameService {
         if (!Objects.equals(game.getUser(), user)) {
             throw new GameException("WTF? Are you cheater?");
         }
-        game = finishGame(game);
+        game = finishGame(game, true);
         return gameConverter.convert(game);
     }
 }
