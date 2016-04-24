@@ -162,8 +162,7 @@ public class GameServiceImpl implements GameService {
             }
             sum += card.getValue();
             if (sum > 21 && gameCards.size() != 2) {
-                while (sum > 21) {
-                    if (aceCount == 0) break;
+                while (sum > 21 && aceCount != 0) {
                     sum -= 10;
                     aceCount--;
                 }
