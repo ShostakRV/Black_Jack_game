@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManagerFactory;
+import java.math.BigDecimal;
 
 /**
  *
@@ -35,7 +36,7 @@ public class TestDataInitializer {
         Transaction transaction = session.beginTransaction();
 
         User user = new User("test@email.com", "$2a$10$x9vXeDsSC2109FZfIJz.pOZ4dJ056xBpbesuMJg3jZ.ThQkV119tS" );
-
+        user.setAmount(BigDecimal.valueOf(99999999));
         session.persist(user);
 
         transaction.commit();

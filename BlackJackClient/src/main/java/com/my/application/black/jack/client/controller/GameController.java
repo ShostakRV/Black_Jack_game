@@ -32,6 +32,12 @@ public class GameController extends AbstractController {
         return gameDto;
     }
 
+    /*@RequestMapping(value = "/hitCard", method = RequestMethod.GET)
+    public GameDto hitCard() {
+        GameDto gameDto = gameService.hitUserCard(SecurityContextHolder.getContext().getAuthentication().getName(), BigDecimal.TEN);
+        return gameDto;
+    }/***/
+
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test() {
         return "HelloWorld! User name: " + SecurityContextHolder.getContext().getAuthentication().getName();

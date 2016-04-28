@@ -7,22 +7,56 @@
     <title>Black Jack Game</title>
     <!--<script src="js/jquery-2.2.3.min.js"></script>-->
     <script th:src="@{/js/jquery-2.2.3.min.js}"></script>
-
-
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
 </head>
-
 <body>
+<div class="container-fluid ">
+    <div class="col-xs-4 col-xs-offset-4 text-center">
+        <div class="row">
+            <h1> Black jack!!</h1>
+        </div>
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Карты крупе</h3>
+                </div>
+                <div id="coupeCards">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Карты пользователя</h3>
+                </div>
+                <div id="userCards">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Доступные действия</h3>
+                </div>
+                <div id="actions">
+                    <button id="hitCard" class="btn btn-default">hit</button>
+                    <button class="btn btn-default">stand</button>
+                    <input id="startGame" type="button" class="btn btn-success" value="Start new game"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Logger</h3>
+                </div>
+                <div id="logger">
 
-<h1> Black jack!!</h1>
-
-<div>
-    <input id="startGame" type="button" value="Start new game"/>
-</div>
-
-<div id="container">
-
-
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script th:src="@{/js/blackJackJQuery.js}"></script>
 </body>
