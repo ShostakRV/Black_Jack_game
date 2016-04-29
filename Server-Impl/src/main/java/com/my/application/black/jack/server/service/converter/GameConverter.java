@@ -17,6 +17,7 @@ public class GameConverter {
         GameDto dto = new GameDto();
         dto.setId(game.getId());
         dto.setRate(game.getRate());
+        dto.setGameStatus(game.getState().name());
         for (GameCard card : game.getGameCards()) {
             if (card.getCardType() == CardType.USER) {
                 dto.getUserCards().add(card.getCard().toString());
