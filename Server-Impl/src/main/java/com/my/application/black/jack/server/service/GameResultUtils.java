@@ -34,13 +34,13 @@ class GameResultUtils {
         GameState gameResultState;
         boolean userHasMorePoints = userPointsSum > croupierPointsSum;
         boolean croupierHasMorePoints = userPointsSum < croupierPointsSum;
-        if (stand && userHasMorePoints || (userPointsSum == 21 && userHasMorePoints)) {
+        if ((stand && userHasMorePoints || (userPointsSum == 21 && userHasMorePoints)) && userPointsSum<=21) {
             if (userCards.size() == 2 && userPointsSum == 21) {
                 gameResultState = GameState.USER_BLACK_JACK;
             } else {
                 gameResultState = GameState.USER_WIN;
             }
-        } else if (stand && croupierHasMorePoints) {
+        } else if (stand && croupierHasMorePoints || userPointsSum > 21) {
             if (croupierCards.size() == 2 && croupierPointsSum == 21) {
                 gameResultState = GameState.CROUPIER_BLACK_JACK;
             } else {
@@ -87,4 +87,5 @@ class GameResultUtils {
         }
         return sum;
     }
+
 }
