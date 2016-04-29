@@ -77,6 +77,27 @@ public class GameStatusTest {
     }
 
     @Test
+    public void testUserLoseOnStandOverHead() {
+        stand = true;
+        gameCardList.add(u9);
+        gameCardList.add(u10);
+        gameCardList.add(u8);
+        gameCardList.add(c2);
+        gameCardList.add(c8);
+        assertEquals(GameState.USER_LOSE, GameResultUtils.getGameResult(gameCardList, stand).getGameState());
+    }
+
+    @Test
+    public void testUserLoseOverHead() {
+        gameCardList.add(u9);
+        gameCardList.add(u10);
+        gameCardList.add(u8);
+        gameCardList.add(c2);
+        gameCardList.add(c8);
+        assertEquals(GameState.USER_LOSE, GameResultUtils.getGameResult(gameCardList, stand).getGameState());
+    }
+
+    @Test
     public void testDeadHeatTwoCards() {
         gameCardList.add(u10);
         gameCardList.add(u11);
