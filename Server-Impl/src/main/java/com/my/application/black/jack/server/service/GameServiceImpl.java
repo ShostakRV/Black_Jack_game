@@ -1,12 +1,7 @@
 package com.my.application.black.jack.server.service;
 
-import com.my.application.black.jack.model.Game;
-import com.my.application.black.jack.model.GameState;
-import com.my.application.black.jack.model.User;
-import com.my.application.black.jack.model.cards.CardType;
-import com.my.application.black.jack.model.cards.CroupierCard;
-import com.my.application.black.jack.model.cards.GameCard;
-import com.my.application.black.jack.model.cards.UserCard;
+import com.my.application.black.jack.model.*;
+import com.my.application.black.jack.model.cards.*;
 import com.my.application.black.jack.server.dao.GameRepository;
 import com.my.application.black.jack.server.dao.UserRepository;
 import com.my.application.black.jack.server.exception.GameException;
@@ -19,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -90,6 +86,7 @@ public class GameServiceImpl implements GameService {
         GameResult gameResult = GameResultUtils.getGameResult(game.getGameCards(), stand);
         if (gameResult.getGameState() != GameState.ON_PROGRESS || stand) {
             game.setState(gameResult.getGameState());
+            game.setFinish(LocalDateTime.now());
             game = gameRepository.saveAndFlush(game);
             amountService.processAmountForFinishedGame(game);
         }
@@ -104,6 +101,7 @@ public class GameServiceImpl implements GameService {
         if (!Objects.equals(game.getUser(), user)) {
             throw new GameException("WTF? Are you cheater?");
         }
+        //
 
         CardGenerator cardGenerator = gameCardService.createCardGenerator(game);
         game.getGameCards().add(cardGenerator.nextUserCard());
