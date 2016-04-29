@@ -8,9 +8,7 @@ import com.my.application.black.jack.model.cards.UserCard;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -129,11 +127,11 @@ public class GameStatusTest {
 
     @Test
     public void testCroupierBlackJackUserTwoCards() {
-        gameCardList.addAll(Arrays.asList(u2));
+        gameCardList.addAll(Collections.singletonList(u2));
         gameCardList.add(u11);
         gameCardList.add(c10);
         gameCardList.add(c11);
         assertEquals(GameState.ON_PROGRESS, GameResultUtils.getGameResult(gameCardList, stand).getGameState());
     }
-
+    // todo + 2 test should be!
 }

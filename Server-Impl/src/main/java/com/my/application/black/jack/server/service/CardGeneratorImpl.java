@@ -27,6 +27,7 @@ public class CardGeneratorImpl implements CardGenerator {
     private GameCardRepository gameCardRepository;
 
     public CardGeneratorImpl(Game game) {
+        //Collesctions.shuffle
         this.putOutedCards = game.getGameCards().stream().map(gameCard -> gameCard.getCard().ordinal()).collect(Collectors.toSet());
         this.game = game;
     }
