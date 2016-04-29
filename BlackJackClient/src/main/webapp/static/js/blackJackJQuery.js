@@ -1,10 +1,11 @@
 var gameId;
 jQuery("#startGame").click(function () {
+    var requestData = {rate: 15};
     jQuery.ajax({
         type: "GET",
         cache: false,
         url: '/game/createGame',
-        data: "",
+        data: requestData,
         success: function (response) {
             gameId = response['id'];
             jQuery('#logger').text(response.toString());
@@ -45,3 +46,20 @@ function droveCard(div, par1, par2) {
     }
     console.log(drawingCanvas)
 }
+
+jQuery("#hitCard").click(function () {
+    var requestData = {'gameId': gameId};
+    jQuery.ajax({
+        type: "GET",
+        cache: false,
+        url: '/game/hitCard',
+        data: requestData,
+        success: function (response) {
+            gameId = response['id'];
+            jQuery('#logger').text(response.toString());
+            droveCards(response['userCards'], 'userCards');
+            droveCards(response['croupierCards'], 'croupierCards');
+            console.log(response);
+        }
+    });
+});
