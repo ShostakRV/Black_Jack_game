@@ -32,6 +32,7 @@ public class GameConverterTest {
         game.setRate(BigDecimal.TEN);
         game.setStart(LocalDateTime.now());
         game.setUser(user);
+        game.setState(GameState.ON_PROGRESS);
 
         game.getGameCards().add(new UserCard(Card.CLUBS_2));
         game.getGameCards().add(new UserCard(Card.CLUBS_3));
@@ -49,6 +50,7 @@ public class GameConverterTest {
         assertEquals(2, gameDto.getUserCards().size());
         assertEquals(game.getId(), gameDto.getId());
         assertEquals(game.getRate(), gameDto.getRate());
+        assertEquals(game.getState().name(), gameDto.getGameStatus());
     }
 
 
