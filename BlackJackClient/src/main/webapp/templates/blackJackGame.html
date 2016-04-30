@@ -30,7 +30,11 @@
         <div class="row">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Карты пользователя</h3>
+                    <nobr>
+                        <h3 class="panel-title">Карты пользователя</h3>
+                        <h3 class="panel-title">Points: <label id="userPoints">0</label></h3>
+
+                    </nobr>
                 </div>
                 <div id="userCards">
                     <canvas class="card gradient-pattern"></canvas>
@@ -45,8 +49,9 @@
                 </div>
                 <div id="actions">
                     <button id="hitCard" class="btn btn-default">hit</button>
-                    <button class="btn btn-default">stand</button>
+                    <button id="stand" class="btn btn-default">stand</button>
                     <input id="startGame" type="button" class="btn btn-success" value="Start new game"/>
+                    <label for="gameStatus">GameStatus: </label><input id="gameStatus" readonly="true" type="text"/>
                 </div>
             </div>
         </div>

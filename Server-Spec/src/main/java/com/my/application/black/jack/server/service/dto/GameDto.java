@@ -18,6 +18,10 @@ public class GameDto {
 
     private String gameStatus;
 
+    private int userPoints;
+
+    private int croupierPoints;
+
     private List<String> userCards = new ArrayList<>();
 
     private List<String> croupierCards = new ArrayList<>();

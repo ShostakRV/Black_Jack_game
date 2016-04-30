@@ -50,4 +50,8 @@ public enum Card {
     public static Card getByOrdinal(Integer randomBall) {
         return cache.get(randomBall);
     }
+
+    public int add(Card card) {
+        return this.getValue() + card.getValue();
+    }
 }

@@ -4,6 +4,7 @@ import com.my.application.black.jack.model.Game;
 import com.my.application.black.jack.model.cards.CardType;
 import com.my.application.black.jack.model.cards.GameCard;
 import com.my.application.black.jack.server.service.dto.GameDto;
+import com.my.application.black.jack.server.service.dto.GameResult;
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,6 +19,7 @@ public class GameConverter {
         dto.setId(game.getId());
         dto.setRate(game.getRate());
         dto.setGameStatus(game.getState().name());
+
         for (GameCard card : game.getGameCards()) {
             if (card.getCardType() == CardType.USER) {
                 dto.getUserCards().add(card.getCard().toString());

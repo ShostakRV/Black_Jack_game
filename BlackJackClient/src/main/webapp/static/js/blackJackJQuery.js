@@ -6,12 +6,13 @@ jQuery("#startGame").click(function () {
         cache: false,
         url: '/game/createGame',
         data: requestData,
-        success: function (response) {
-            gameId = response['id'];
-            jQuery('#logger').text(response.toString());
-            droveCards(response['userCards'], 'userCards');
-            droveCards(response['croupierCards'], 'croupierCards');
-            console.log(response);
+        success: function (gameDto) {
+            gameId = gameDto['id'];
+            jQuery('#gameStatus').val(gameDto.gameStatus);
+            jQuery('#logger').text(gameDto.toString());
+            droveCards(gameDto['userCards'], 'userCards');
+            droveCards(gameDto['croupierCards'], 'croupierCards');
+            console.log(gameDto);
         }
     });
 });
@@ -54,12 +55,31 @@ jQuery("#hitCard").click(function () {
         cache: false,
         url: '/game/hitCard',
         data: requestData,
-        success: function (response) {
-            gameId = response['id'];
-            jQuery('#logger').text(response.toString());
-            droveCards(response['userCards'], 'userCards');
-            droveCards(response['croupierCards'], 'croupierCards');
-            console.log(response);
+        success: function (gameDto) {
+            gameId = gameDto['id'];
+            jQuery('#gameStatus').val(gameDto.gameStatus);
+            jQuery('#logger').text(gameDto.toString());
+            droveCards(gameDto['userCards'], 'userCards');
+            droveCards(gameDto['croupierCards'], 'croupierCards');
+            console.log(gameDto);
+        }
+    });
+});
+
+jQuery("#stand").click(function () {
+    var requestData = {'gameId': gameId};
+    jQuery.ajax({
+        type: "GET",
+        cache: false,
+        url: '/game/stand',
+        data: requestData,
+        success: function (gameDto) {
+            gameId = gameDto['id'];
+            jQuery('#gameStatus').val(gameDto.gameStatus);
+            jQuery('#logger').text(gameDto.toString());
+            droveCards(gameDto['userCards'], 'userCards');
+            droveCards(gameDto['croupierCards'], 'croupierCards');
+            console.log(gameDto);
         }
     });
 });
