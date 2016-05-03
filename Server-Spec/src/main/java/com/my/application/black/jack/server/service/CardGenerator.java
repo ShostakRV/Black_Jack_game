@@ -1,6 +1,5 @@
 package com.my.application.black.jack.server.service;
 
-import com.my.application.black.jack.model.Card;
 import com.my.application.black.jack.model.cards.CroupierCard;
 import com.my.application.black.jack.model.cards.UserCard;
 

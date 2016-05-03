@@ -1,12 +1,9 @@
 package com.my.application.black.jack.server.service;
 
-import com.my.application.black.jack.model.Card;
 import com.my.application.black.jack.model.Game;
 import com.my.application.black.jack.model.GameState;
 import com.my.application.black.jack.model.User;
-import com.my.application.black.jack.model.cards.CroupierCard;
-import com.my.application.black.jack.model.cards.GameCard;
-import com.my.application.black.jack.model.cards.UserCard;
+import com.my.application.black.jack.model.cards.*;
 import com.my.application.black.jack.server.dao.GameRepository;
 import com.my.application.black.jack.server.dao.UserRepository;
 import com.my.application.black.jack.server.exception.GameException;
@@ -66,13 +63,13 @@ public class GameServiceMockTest {
     @Mock
     private GameCardService gameCardService;
 
-    private UserCard userCard1 = new UserCard(Card.CLUBS_ACE);
+    private UserCard userCard1 = new UserCard(CardName.ACE, CardMask.CLUBS);
 
-    private UserCard userCard2 = new UserCard(Card.CLUBS_6);
+    private UserCard userCard2 = new UserCard(CardName._6, CardMask.CLUBS);
 
-    private CroupierCard croupierCard1 = new CroupierCard(Card.CLUBS_2);
+    private CroupierCard croupierCard1 = new CroupierCard(CardName._2, CardMask.CLUBS);
 
-    private CroupierCard croupierCard2 = new CroupierCard(Card.CLUBS_3);
+    private CroupierCard croupierCard2 = new CroupierCard(CardName._3, CardMask.CLUBS);
 
     private List<GameCard> gameCards = new ArrayList<>();
 
@@ -169,11 +166,11 @@ public class GameServiceMockTest {
 
     @Test
     public void testSumCardPointsForeAces() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        gameCards.add(new UserCard(Card.DIAMONDS_ACE));
-        gameCards.add(new UserCard(Card.DIAMONDS_ACE));
-        gameCards.add(new UserCard(Card.DIAMONDS_ACE));
-        gameCards.add(new UserCard(Card.DIAMONDS_ACE));
-        Method sumCardPoints = GameServiceImpl.class.getDeclaredMethod("sumCardPoints", List.class);
+        gameCards.add(new UserCard(CardName.ACE, CardMask.DIAMONDS));
+        gameCards.add(new UserCard(CardName.ACE, CardMask.DIAMONDS));
+        gameCards.add(new UserCard(CardName.ACE, CardMask.DIAMONDS));
+        gameCards.add(new UserCard(CardName.ACE, CardMask.DIAMONDS));
+        Method sumCardPoints = GameResultUtils.class.getDeclaredMethod("sumCardPoints", List.class);
         sumCardPoints.setAccessible(true);
         int res = (int) sumCardPoints.invoke(gameService, gameCards);
         assertEquals((11 + 3), res);
@@ -181,9 +178,9 @@ public class GameServiceMockTest {
 
     @Test
     public void testSumCardPointsTwoAces() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        gameCards.add(new UserCard(Card.DIAMONDS_ACE));
-        gameCards.add(new UserCard(Card.DIAMONDS_ACE));
-        Method sumCardPoints = GameServiceImpl.class.getDeclaredMethod("sumCardPoints", List.class);
+        gameCards.add(new UserCard(CardName.ACE, CardMask.DIAMONDS));
+        gameCards.add(new UserCard(CardName.ACE, CardMask.DIAMONDS));
+        Method sumCardPoints = GameResultUtils.class.getDeclaredMethod("sumCardPoints", List.class);
         sumCardPoints.setAccessible(true);
         int res = (int) sumCardPoints.invoke(gameService, gameCards);
         assertEquals((22), res);
@@ -191,19 +188,19 @@ public class GameServiceMockTest {
 
     @Test
     public void testSumCardPointsTest3() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        gameCards.add(new UserCard(Card.DIAMONDS_2));
-        gameCards.add(new UserCard(Card.DIAMONDS_2));
-        gameCards.add(new UserCard(Card.DIAMONDS_2));
-        gameCards.add(new UserCard(Card.DIAMONDS_2));
-        gameCards.add(new UserCard(Card.DIAMONDS_3));
-        gameCards.add(new UserCard(Card.DIAMONDS_3));
-        gameCards.add(new UserCard(Card.DIAMONDS_3));
-        gameCards.add(new UserCard(Card.DIAMONDS_3));
-        gameCards.add(new UserCard(Card.DIAMONDS_4));
-        gameCards.add(new UserCard(Card.DIAMONDS_4));
-        gameCards.add(new UserCard(Card.DIAMONDS_4));
-        gameCards.add(new UserCard(Card.DIAMONDS_4));
-        Method sumCardPoints = GameServiceImpl.class.getDeclaredMethod("sumCardPoints", List.class);
+        gameCards.add(new UserCard(CardName._2, CardMask.DIAMONDS));
+        gameCards.add(new UserCard(CardName._2, CardMask.DIAMONDS));
+        gameCards.add(new UserCard(CardName._2, CardMask.DIAMONDS));
+        gameCards.add(new UserCard(CardName._2, CardMask.DIAMONDS));
+        gameCards.add(new UserCard(CardName._3, CardMask.DIAMONDS));
+        gameCards.add(new UserCard(CardName._3, CardMask.DIAMONDS));
+        gameCards.add(new UserCard(CardName._3, CardMask.DIAMONDS));
+        gameCards.add(new UserCard(CardName._3, CardMask.DIAMONDS));
+        gameCards.add(new UserCard(CardName._4, CardMask.DIAMONDS));
+        gameCards.add(new UserCard(CardName._4, CardMask.DIAMONDS));
+        gameCards.add(new UserCard(CardName._4, CardMask.DIAMONDS));
+        gameCards.add(new UserCard(CardName._4, CardMask.DIAMONDS));
+        Method sumCardPoints = GameResultUtils.class.getDeclaredMethod("sumCardPoints", List.class);
         sumCardPoints.setAccessible(true);
         int res = (int) sumCardPoints.invoke(gameService, gameCards);
         assertEquals((2 * 4 + 3 * 4 + 4 * 4), res);

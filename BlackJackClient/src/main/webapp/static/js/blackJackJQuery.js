@@ -1,29 +1,13 @@
-var gameId;
-jQuery("#startGame").click(function () {
-    var requestData = {rate: 15};
-    jQuery.ajax({
-        type: "GET",
-        cache: false,
-        url: '/game/createGame',
-        data: requestData,
-        success: function (gameDto) {
-            gameId = gameDto['id'];
-            jQuery('#gameStatus').val(gameDto.gameStatus);
-            jQuery('#logger').text(gameDto.toString());
-            droveCards(gameDto['userCards'], 'userCards');
-            droveCards(gameDto['croupierCards'], 'croupierCards');
-            console.log(gameDto);
-        }
-    });
-});
+function toLoger(obj) {
+    jQuery('#logger').text(JSON.stringify(obj));
+}
 function droveCards(arr, divName) {
     jQuery('#' + divName).html('');
     arr.forEach(function (element, index, array) {
         jQuery('#' + divName).html(jQuery('#' + divName).html() + '<canvas width="100" height="150" class="card" id="' + divName + index + '"></canvas>');
     });
     arr.forEach(function (element, index, array) {
-        var pair = element.split('_');
-        droveCard(divName + index, pair[0], pair[1]);
+        droveCard(divName + index, element.cardMask, element.cardName);
     });
 }
 function droveCard(div, par1, par2) {
@@ -45,8 +29,25 @@ function droveCard(div, par1, par2) {
         ctx.fillText(symbol, 10, 30);
         ctx.fillText(par2, 10, 70);
     }
-    console.log(drawingCanvas)
 }
+
+var gameId;
+jQuery("#startGame").click(function () {
+    var requestData = {rate: 15};
+    jQuery.ajax({
+        type: "GET",
+        cache: false,
+        url: '/game/createGame',
+        data: requestData,
+        success: function (gameDto) {
+            gameId = gameDto['id'];
+            jQuery('#gameStatus').val(gameDto.gameStatus);
+            droveCards(gameDto['userCards'], 'userCards');
+            droveCards(gameDto['croupierCards'], 'croupierCards');
+            toLoger(gameDto);
+        }
+    });
+});
 
 jQuery("#hitCard").click(function () {
     var requestData = {'gameId': gameId};
@@ -58,10 +59,10 @@ jQuery("#hitCard").click(function () {
         success: function (gameDto) {
             gameId = gameDto['id'];
             jQuery('#gameStatus').val(gameDto.gameStatus);
-            jQuery('#logger').text(gameDto.toString());
             droveCards(gameDto['userCards'], 'userCards');
             droveCards(gameDto['croupierCards'], 'croupierCards');
-            console.log(gameDto);
+
+            toLoger(gameDto);
         }
     });
 });
@@ -76,10 +77,9 @@ jQuery("#stand").click(function () {
         success: function (gameDto) {
             gameId = gameDto['id'];
             jQuery('#gameStatus').val(gameDto.gameStatus);
-            jQuery('#logger').text(gameDto.toString());
             droveCards(gameDto['userCards'], 'userCards');
             droveCards(gameDto['croupierCards'], 'croupierCards');
-            console.log(gameDto);
+            toLoger(gameDto);
         }
     });
 });

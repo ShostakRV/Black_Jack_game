@@ -22,8 +22,8 @@ public class GameDto {
 
     private int croupierPoints;
 
-    private List<String> userCards = new ArrayList<>();
+    private List<CardDto> userCards = new ArrayList<>();
 
-    private List<String> croupierCards = new ArrayList<>();
+    private List<CardDto> croupierCards = new ArrayList<>();
 
 }

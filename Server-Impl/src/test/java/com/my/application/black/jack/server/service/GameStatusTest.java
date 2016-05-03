@@ -1,14 +1,13 @@
 package com.my.application.black.jack.server.service;
 
-import com.my.application.black.jack.model.Card;
 import com.my.application.black.jack.model.GameState;
-import com.my.application.black.jack.model.cards.CroupierCard;
-import com.my.application.black.jack.model.cards.GameCard;
-import com.my.application.black.jack.model.cards.UserCard;
+import com.my.application.black.jack.model.cards.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -19,15 +18,15 @@ import static org.junit.Assert.assertEquals;
 public class GameStatusTest {
 
     private List<GameCard> gameCardList;
-    private UserCard u11 = new UserCard(Card.CLUBS_ACE);
-    private UserCard u10 = new UserCard(Card.CLUBS_10);
-    private UserCard u9 = new UserCard(Card.CLUBS_9);
-    private UserCard u8 = new UserCard(Card.CLUBS_8);
-    private UserCard u2 = new UserCard(Card.CLUBS_2);
-    private CroupierCard c11 = new CroupierCard(Card.CLUBS_ACE);
-    private CroupierCard c10 = new CroupierCard(Card.CLUBS_10);
-    private CroupierCard c8 = new CroupierCard(Card.CLUBS_8);
-    private CroupierCard c2 = new CroupierCard(Card.CLUBS_2);
+    private UserCard u11 = new UserCard(CardName.ACE, CardMask.CLUBS);
+    private UserCard u10 = new UserCard(CardName._10, CardMask.CLUBS);
+    private UserCard u9 = new UserCard(CardName._9, CardMask.CLUBS);
+    private UserCard u8 = new UserCard(CardName._8, CardMask.CLUBS);
+    private UserCard u2 = new UserCard(CardName._2, CardMask.CLUBS);
+    private CroupierCard c11 = new CroupierCard(CardName.ACE, CardMask.CLUBS);
+    private CroupierCard c10 = new CroupierCard(CardName._10, CardMask.CLUBS);
+    private CroupierCard c8 = new CroupierCard(CardName._8, CardMask.CLUBS);
+    private CroupierCard c2 = new CroupierCard(CardName._2, CardMask.CLUBS);
     private boolean stand;
 
     @Before

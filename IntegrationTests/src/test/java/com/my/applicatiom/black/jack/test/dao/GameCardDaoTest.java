@@ -1,8 +1,9 @@
 package com.my.applicatiom.black.jack.test.dao;
 
 import com.my.applicatiom.black.jack.test.config.IntegrationTestConfig;
-import com.my.application.black.jack.model.Card;
 import com.my.application.black.jack.model.Game;
+import com.my.application.black.jack.model.cards.CardMask;
+import com.my.application.black.jack.model.cards.CardName;
 import com.my.application.black.jack.model.cards.CroupierCard;
 import com.my.application.black.jack.model.cards.UserCard;
 import com.my.application.black.jack.server.config.ServerConfig;
@@ -48,7 +49,8 @@ public class GameCardDaoTest {
         Game game = gameRepository.findOne(gameDto.getId());
         UserCard card1 = gameCardRepository.newUserCard();
 
-        card1.setCard(Card.CLUBS_2);
+        card1.setCardMask(CardMask.CLUBS);
+        card1.setCardName(CardName._2);
         card1.setGame(game);
         card1.setSorting(0);
 
@@ -57,7 +59,8 @@ public class GameCardDaoTest {
         CroupierCard card2 = gameCardRepository.newCroupierCard();
         card2.setGame(game);
         card2.setSorting(0);
-        card2.setCard(Card.CLUBS_6);
+        card2.setCardMask(CardMask.CLUBS);
+        card2.setCardName(CardName._6);
 
         game.getGameCards().add(card2);
         gameRepository.saveAndFlush(game);
@@ -66,4 +69,5 @@ public class GameCardDaoTest {
 
 
     }
+
 }

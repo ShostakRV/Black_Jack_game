@@ -3,8 +3,8 @@ package com.my.application.black.jack.server.service.converter;
 import com.my.application.black.jack.model.Game;
 import com.my.application.black.jack.model.cards.CardType;
 import com.my.application.black.jack.model.cards.GameCard;
+import com.my.application.black.jack.server.service.dto.CardDto;
 import com.my.application.black.jack.server.service.dto.GameDto;
-import com.my.application.black.jack.server.service.dto.GameResult;
 import org.springframework.stereotype.Component;
 
 /**
@@ -21,13 +21,14 @@ public class GameConverter {
         dto.setGameStatus(game.getState().name());
 
         for (GameCard card : game.getGameCards()) {
+            CardDto cardDto = new CardDto(card.getCardName().toString(), card.getCardMask().toString());
             if (card.getCardType() == CardType.USER) {
-                dto.getUserCards().add(card.getCard().toString());
+                dto.getUserCards().add(cardDto);
             } else {
                 if (dto.getCroupierCards().isEmpty()) {
-                    dto.getCroupierCards().add(card.getCard().toString());
+                    dto.getCroupierCards().add(cardDto);
                 } else if (game.getFinish() != null) {
-                    dto.getCroupierCards().add(card.getCard().toString());
+                    dto.getCroupierCards().add(cardDto);
                 }
             }
         }

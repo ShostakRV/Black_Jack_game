@@ -1,9 +1,10 @@
 package com.my.application.black.jack.server.service.converter;
 
-import com.my.application.black.jack.model.Card;
 import com.my.application.black.jack.model.Game;
 import com.my.application.black.jack.model.GameState;
 import com.my.application.black.jack.model.User;
+import com.my.application.black.jack.model.cards.CardMask;
+import com.my.application.black.jack.model.cards.CardName;
 import com.my.application.black.jack.model.cards.CroupierCard;
 import com.my.application.black.jack.model.cards.UserCard;
 import com.my.application.black.jack.server.service.dto.GameDto;
@@ -34,11 +35,11 @@ public class GameConverterTest {
         game.setUser(user);
         game.setState(GameState.ON_PROGRESS);
 
-        game.getGameCards().add(new UserCard(Card.CLUBS_2));
-        game.getGameCards().add(new UserCard(Card.CLUBS_3));
+        game.getGameCards().add(new UserCard(CardName._2, CardMask.CLUBS));
+        game.getGameCards().add(new UserCard(CardName._3, CardMask.CLUBS));
 
-        game.getGameCards().add(new CroupierCard(Card.CLUBS_4));
-        game.getGameCards().add(new CroupierCard(Card.CLUBS_5));
+        game.getGameCards().add(new CroupierCard(CardName._4, CardMask.CLUBS));
+        game.getGameCards().add(new CroupierCard(CardName._5, CardMask.CLUBS));
     }
 
     @Test

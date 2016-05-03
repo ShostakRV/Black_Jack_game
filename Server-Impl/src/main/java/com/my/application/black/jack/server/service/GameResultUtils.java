@@ -1,7 +1,7 @@
 package com.my.application.black.jack.server.service;
 
-import com.my.application.black.jack.model.Card;
 import com.my.application.black.jack.model.GameState;
+import com.my.application.black.jack.model.cards.CardName;
 import com.my.application.black.jack.model.cards.CardType;
 import com.my.application.black.jack.model.cards.GameCard;
 import com.my.application.black.jack.server.exception.GameException;
@@ -65,16 +65,16 @@ class GameResultUtils {
     }
 
     static int sumCardPoints(List<GameCard> gameCards) {
-        List<Card> targetCards = gameCards.stream()
-                .map(GameCard::getCard)
+        List<CardName> targetCards = gameCards.stream()
+                .map(GameCard::getCardName)
                 .collect(Collectors.toList());
         if (targetCards.isEmpty()) {
             throw new GameException("Something goes wrong! Can not calculate points sum.");
         }
         int aceCount = 0;
         int sum = 0;
-        for (Card card : targetCards) {
-            if (card.isAce()) {
+        for (CardName card : targetCards) {
+            if (card.getValue() == 11) {
                 aceCount++;
             }
             sum += card.getValue();

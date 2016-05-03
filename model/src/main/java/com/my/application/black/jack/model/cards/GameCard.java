@@ -1,7 +1,6 @@
 package com.my.application.black.jack.model.cards;
 
 import com.my.application.black.jack.model.AbstractEntity;
-import com.my.application.black.jack.model.Card;
 import com.my.application.black.jack.model.Game;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,17 +29,18 @@ public abstract class GameCard extends AbstractEntity {
     @Column(name = "CARD_TYPE", insertable = false, updatable = false)
     @Enumerated(EnumType.STRING)
     protected final CardType cardType;
-
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "CARD_MASK")
+    protected CardMask cardMask;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "CARD_HEIGHT")
+    protected CardName cardName;
     @ManyToOne
     @NotNull
     @JoinColumn(name = "FK_GAME")
     private Game game;
-
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    @Column(name = "CARD")
-    protected Card card;
-
     @NotNull
     @Column(name = "SORTING")
     private Integer sorting;
@@ -49,12 +49,20 @@ public abstract class GameCard extends AbstractEntity {
         this.cardType = cardType;
     }
 
+    GameCard(CardType cardType, CardName cardName, CardMask cardMask) {
+        this(cardType);
+        this.cardMask = cardMask;
+        this.cardName = cardName;
+    }
+
+
     @Override
     public String toString() {
         return "GameCard{" +
                 "cardType=" + cardType +
                 ", game=" + game +
-                ", card=" + card +
+                ", cardMask=" + cardMask +
+                ", cardHeight=" + cardName +
                 ", sorting=" + sorting +
                 '}';
     }

@@ -1,7 +1,12 @@
 package com.my.application.black.jack.server.service;
 
-import com.my.application.black.jack.model.*;
-import com.my.application.black.jack.model.cards.*;
+import com.my.application.black.jack.model.Game;
+import com.my.application.black.jack.model.GameState;
+import com.my.application.black.jack.model.User;
+import com.my.application.black.jack.model.cards.CardType;
+import com.my.application.black.jack.model.cards.CroupierCard;
+import com.my.application.black.jack.model.cards.GameCard;
+import com.my.application.black.jack.model.cards.UserCard;
 import com.my.application.black.jack.server.dao.GameRepository;
 import com.my.application.black.jack.server.dao.UserRepository;
 import com.my.application.black.jack.server.exception.GameException;
@@ -75,7 +80,7 @@ public class GameServiceImpl implements GameService {
         game = gameRepository.saveAndFlush(game);
         amountService.withdrawForNewGame(game);
 
-        if (userCard1.getCard().getValue() + userCard2.getCard().getValue() == 21) { // todo make test case
+        if (userCard1.getCardName().getValue() + userCard2.getCardName().getValue() == 21) { // todo make test case
             game = finishGame(game, false);
         }
 
