@@ -22,7 +22,8 @@
 * [AngularJS](https://angularjs.org/)
     * [AngularJS Tutorial](http://www.tutorialspoint.com/angularjs/index.htm)
 * Other
-    * [Markdown Cheatsheet *.md](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+    * [Markdown Cheatsheet \*.md](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+    * [projectlombok.org] (https://projectlombok.org/)
 
 ##IDEA configs
 <img  width=400 src="https://raw.githubusercontent.com/ShostakRV/Black_Jack_game/master/docs/Annotation_processing.jpg" />
