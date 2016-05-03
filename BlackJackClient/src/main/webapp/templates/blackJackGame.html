@@ -51,10 +51,18 @@
                     <h3 class="panel-title">Доступные действия</h3>
                 </div>
                 <div id="actions">
-                    <button id="hitCard" class="btn btn-default">hit</button>
-                    <button id="stand" class="btn btn-default">stand</button>
+                    <button id="hitCard" class="btn btn-default">Hit</button>
+                    <button id="stand" class="btn btn-default">Stand</button>
+                    <button id="split" class="btn btn-default disabled">Сплит(in progress)</button>
+                    <button id="double" class="btn btn-default disabled">Дабл(in progress)</button>
+                    <button id="save" class="btn btn-default disabled">Страховка(in progress)</button>
                     <input id="startGame" type="button" class="btn btn-success" value="Start new game"/>
-                    <label for="gameStatus">GameStatus: </label><input id="gameStatus" readonly="true" type="text"/>
+                    <br/>
+                    <div class="form-group">
+                        <label for="gameStatus">GameStatus: </label>
+                        <input id="gameStatus" class="form-control" readonly="true" type="text"/>
+                    </div>
+
                 </div>
             </div>
         </div>
