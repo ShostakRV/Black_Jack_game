@@ -32,6 +32,17 @@ function droveCard(div, par1, par2) {
 }
 
 var gameId;
+
+function guiUpdate(gameDto) {
+    gameId = gameDto['id'];
+    jQuery('#gameStatus').val(gameDto.gameStatus);
+    jQuery('#userPoints').text(gameDto.userPoints);
+    jQuery('#croupierPoints').text(gameDto.croupierPoints);
+    droveCards(gameDto['userCards'], 'userCards');
+    droveCards(gameDto['croupierCards'], 'croupierCards');
+    toLoger(gameDto);
+}
+
 jQuery("#startGame").click(function () {
     var requestData = {rate: 15};
     jQuery.ajax({
@@ -40,11 +51,7 @@ jQuery("#startGame").click(function () {
         url: '/game/createGame',
         data: requestData,
         success: function (gameDto) {
-            gameId = gameDto['id'];
-            jQuery('#gameStatus').val(gameDto.gameStatus);
-            droveCards(gameDto['userCards'], 'userCards');
-            droveCards(gameDto['croupierCards'], 'croupierCards');
-            toLoger(gameDto);
+            guiUpdate(gameDto);
         }
     });
 });
@@ -57,12 +64,7 @@ jQuery("#hitCard").click(function () {
         url: '/game/hitCard',
         data: requestData,
         success: function (gameDto) {
-            gameId = gameDto['id'];
-            jQuery('#gameStatus').val(gameDto.gameStatus);
-            droveCards(gameDto['userCards'], 'userCards');
-            droveCards(gameDto['croupierCards'], 'croupierCards');
-
-            toLoger(gameDto);
+            guiUpdate(gameDto);
         }
     });
 });
@@ -75,11 +77,7 @@ jQuery("#stand").click(function () {
         url: '/game/stand',
         data: requestData,
         success: function (gameDto) {
-            gameId = gameDto['id'];
-            jQuery('#gameStatus').val(gameDto.gameStatus);
-            droveCards(gameDto['userCards'], 'userCards');
-            droveCards(gameDto['croupierCards'], 'croupierCards');
-            toLoger(gameDto);
+            guiUpdate(gameDto);
         }
     });
 });

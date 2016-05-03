@@ -54,6 +54,30 @@ public class GameConverterTest {
         assertEquals(game.getState().name(), gameDto.getGameStatus());
     }
 
+    @Test
+    public void testNewGameConvertPoints() {
+        game.setState(GameState.USER_LOSE);
+
+        GameDto gameDto = gameConverter.convert(game);
+        assertEquals(2, gameDto.getUserCards().size());
+        assertEquals(2, gameDto.getCroupierCards().size());
+        assertEquals(5, gameDto.getUserPoints());
+        assertEquals(9, gameDto.getCroupierPoints());
+    }
+
+    @Test
+    public void testNewGameConvertPoints21() {
+        game.setState(GameState.USER_WIN);
+
+        game.getGameCards().add(new UserCard(CardName._10, CardMask.CLUBS));
+        game.getGameCards().add(new UserCard(CardName._6, CardMask.CLUBS));
+
+        GameDto gameDto = gameConverter.convert(game);
+        assertEquals(4, gameDto.getUserCards().size());
+        assertEquals(21, gameDto.getUserPoints());
+        assertEquals(9, gameDto.getCroupierPoints());
+    }
+
 
     @Test
     public void testFinishedGame() {

@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
  * Created: Pavlenko Bohdan
  * Date: 24.04.2016.
  */
-class GameResultUtils {
+public class GameResultUtils {
     static GameResult getGameResult(List<GameCard> gameCards, boolean stand) {
         GameResult gameResult = new GameResult();
         List<GameCard> userCards = gameCards.stream()
@@ -64,7 +64,7 @@ class GameResultUtils {
         return gameResult;
     }
 
-    static int sumCardPoints(List<GameCard> gameCards) {
+    public static int sumCardPoints(List<GameCard> gameCards) {
         List<CardName> targetCards = gameCards.stream()
                 .map(GameCard::getCardName)
                 .collect(Collectors.toList());
