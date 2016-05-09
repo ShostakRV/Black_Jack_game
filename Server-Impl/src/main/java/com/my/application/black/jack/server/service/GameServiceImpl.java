@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+
 /**
  * Developer: Roman Shostak
  * Date: 13-Oct-15.
@@ -80,14 +81,22 @@ public class GameServiceImpl implements GameService {
         game = gameRepository.saveAndFlush(game);
         amountService.withdrawForNewGame(game);
 
-        if (userCard1.getCardName().getValue() + userCard2.getCardName().getValue() == 21) { // todo make test case
-            game = finishGame(game, false);
+        int sumOfUserCards = userCard1.getCardName().getValue() + userCard2.getCardName().getValue();
+        if (sumOfUserCards == 21) { // todo make test case
+            return finishGame(game, false);
         }
 
-        return gameConverter.convert(game);
+        return gameConverter.convert(game, sumOfUserCards, croupierCard1.getCardName().getValue());
     }
 
-    private Game finishGame(Game game, boolean stand) {
+    private GameDto finishGame(Game game, boolean stand) {
+
+        if (stand) {
+            CardGenerator cardGenerator = gameCardService.createCardGenerator(game);
+            while (GameResultUtils.sumCardPoints(extractCardsByType(game, CardType.CROUPIER)) < 17) {
+                game.getGameCards().add(cardGenerator.nextCroupierCard());
+            }
+        }
         GameResult gameResult = GameResultUtils.getGameResult(game.getGameCards(), stand);
         if (gameResult.getGameState() != GameState.ON_PROGRESS || stand) {
             game.setState(gameResult.getGameState());
@@ -95,7 +104,8 @@ public class GameServiceImpl implements GameService {
             game = gameRepository.saveAndFlush(game);
             amountService.processAmountForFinishedGame(game);
         }
-        return game;
+
+        return gameConverter.convert(game, gameResult.getUserPoints(), 0);
     }
 
     @Override
@@ -106,17 +116,16 @@ public class GameServiceImpl implements GameService {
         if (!Objects.equals(game.getUser(), user)) {
             throw new GameException("WTF? Are you cheater?");
         }
-        //
 
         CardGenerator cardGenerator = gameCardService.createCardGenerator(game);
         game.getGameCards().add(cardGenerator.nextUserCard());
         game = gameRepository.saveAndFlush(game);
-        List<GameCard> userCards = game.getGameCards().stream().filter(gameCard -> gameCard.getCardType() == CardType.USER).collect(Collectors.toList());
+        List<GameCard> userCards = extractCardsByType(game, CardType.USER);
         int userPoints = GameResultUtils.sumCardPoints(userCards);
         if (userPoints >= 21) {// todo make test case
-            game = finishGame(game, true);
+            return finishGame(game, true);
         }
-        return gameConverter.convert(game);
+        return gameConverter.convert(game, userPoints, 0);
     }
 
     @Override
@@ -127,7 +136,12 @@ public class GameServiceImpl implements GameService {
         if (!Objects.equals(game.getUser(), user)) {
             throw new GameException("WTF? Are you cheater?");
         }
-        game = finishGame(game, true);
-        return gameConverter.convert(game);
+        return finishGame(game, true);
+    }
+
+    private List<GameCard> extractCardsByType(Game game, CardType type) {
+        return game.getGameCards().stream()
+                .filter(card -> card.getCardType() == type)
+                .collect(Collectors.toList());
     }
 }
