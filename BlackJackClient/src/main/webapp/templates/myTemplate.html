@@ -1,13 +1,48 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-    <head>
-        <title>Spring Security Example</title>
-    </head>
-    <body>
-        <h1>Welcome!</h1>
-        <h1 style="color: mediumvioletred">My template</h1>
-        <p>Click <a th:href="@{/}">here</a> to see index. </p>
-    </body>
+>
+<head>
+    <title>Spring Security Example</title>
+    <script th:src="@{/js/jquery-2.2.3.min.js}"></script>
+    <script th:src="@{/js/myUtils.js}"></script>
+</head>
+<body>
+<h1>Welcome!</h1>
+<h1 style="color: mediumvioletred">My template</h1>
+<p>Click <a th:href="@{/}">here</a> to see index. </p>
+<input type="button" value="TestSome" id="testSome"/>
+<script>
+    jQuery("#testSome").click(function () {
+        var result;
+        jQuery.ajax({
+            type: "GET",
+            async: false,
+            cache: false,
+            url: '/testDto',
+            success: function (someDto) {
+                result = someDto;
+            }
+        });
+        var token = getCookie("XSRF-TOKEN");
+        $.ajax({
+            type: "POST",
+            async: false,
+            cache: false,
+            data: JSON.stringify(result),
+//            dataType: 'json',
+            contentType: 'application/json;charset=UTF-8',
+            url: '/testDto/process',
+            beforeSend: function (request)
+            {
+                request.setRequestHeader("X-XSRF-TOKEN", token);
+            },
+            success: function (someDto) {
+                console.log(someDto)
+            }
+        });
+    });
+
+</script>
+</body>
 </html>

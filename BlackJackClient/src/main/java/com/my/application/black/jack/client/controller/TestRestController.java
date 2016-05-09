@@ -38,11 +38,20 @@ public class TestRestController {
         return new SomeDto(1L, name, some);
     }
 
+    @RequestMapping(value = "/testDto/process", method = RequestMethod.POST)
+    public SomeDto testDto2(@RequestBody SomeDto some) {
+        some.setName("Processed!");
+        some.setSome("Processed!");
+        return some;
+    }
 
     public static class SomeDto {
         private long id;
         private String name;
         private String some;
+
+        public SomeDto() {
+        }
 
         public SomeDto(long id, String name, String some) {
             this.id = id;
