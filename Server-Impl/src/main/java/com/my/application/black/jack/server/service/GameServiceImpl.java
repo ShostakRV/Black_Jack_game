@@ -90,7 +90,7 @@ public class GameServiceImpl implements GameService {
     }
 
     private GameDto finishGame(Game game, boolean stand) {
-
+        int croupierPoints = 0;
         if (stand) {
             CardGenerator cardGenerator = gameCardService.createCardGenerator(game);
             while (GameResultUtils.sumCardPoints(extractCardsByType(game, CardType.CROUPIER)) < 17) {
@@ -103,9 +103,10 @@ public class GameServiceImpl implements GameService {
             game.setFinish(LocalDateTime.now());
             game = gameRepository.saveAndFlush(game);
             amountService.processAmountForFinishedGame(game);
+            croupierPoints = stand ? gameResult.getCroupierPoints() : 0;
         }
 
-        return gameConverter.convert(game, gameResult.getUserPoints(), 0);
+        return gameConverter.convert(game, gameResult.getUserPoints(), croupierPoints);
     }
 
     @Override
