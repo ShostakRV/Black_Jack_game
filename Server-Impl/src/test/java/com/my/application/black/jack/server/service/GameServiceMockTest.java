@@ -139,7 +139,7 @@ public class GameServiceMockTest {
         assertEquals(croupierCard2, gameCards.get(3));
 
         verify(amountService).withdrawForNewGame(savedGame);
-        verify(gameConverter).convert(savedGame);
+        verify(gameConverter).convert(savedGame, 17, 2);
     }
 
     @Test(expected = GameException.class)
@@ -155,7 +155,7 @@ public class GameServiceMockTest {
         assertEquals(1, gameCards.size());
         assertEquals(userCard1, gameCards.get(0));
         verify(gameRepository).saveAndFlush(game);
-        verify(gameConverter).convert(savedGame);
+        verify(gameConverter).convert(savedGame, 11, 0);
     }
 
     @Test

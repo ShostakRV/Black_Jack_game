@@ -46,7 +46,7 @@ public class GameConverterTest {
     public void testNewGameConvert() {
         game.setState(GameState.ON_PROGRESS);
 
-        GameDto gameDto = gameConverter.convert(game);
+        GameDto gameDto = gameConverter.convert(game, 5, 9);
         assertEquals(1, gameDto.getCroupierCards().size());
         assertEquals(2, gameDto.getUserCards().size());
         assertEquals(game.getId(), gameDto.getId());
@@ -58,7 +58,7 @@ public class GameConverterTest {
     public void testNewGameConvertPoints() {
         game.setState(GameState.USER_LOSE);
 
-        GameDto gameDto = gameConverter.convert(game);
+        GameDto gameDto = gameConverter.convert(game, 5, 9);
         assertEquals(2, gameDto.getUserCards().size());
         assertEquals(2, gameDto.getCroupierCards().size());
         assertEquals(5, gameDto.getUserPoints());
@@ -72,7 +72,7 @@ public class GameConverterTest {
         game.getGameCards().add(new UserCard(CardName._10, CardMask.CLUBS));
         game.getGameCards().add(new UserCard(CardName._6, CardMask.CLUBS));
 
-        GameDto gameDto = gameConverter.convert(game);
+        GameDto gameDto = gameConverter.convert(game, 21, 9);
         assertEquals(4, gameDto.getUserCards().size());
         assertEquals(21, gameDto.getUserPoints());
         assertEquals(9, gameDto.getCroupierPoints());
@@ -86,7 +86,7 @@ public class GameConverterTest {
         game.setState(GameState.USER_WIN);
         game.setFinish(LocalDateTime.now());
 
-        gameDto = gameConverter.convert(game);
+        gameDto = gameConverter.convert(game, 5, 9);
         assertEquals(2, gameDto.getCroupierCards().size());
         assertEquals(2, gameDto.getUserCards().size());
         assertEquals(game.getId(), gameDto.getId());
