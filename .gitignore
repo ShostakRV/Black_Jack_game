@@ -3,3 +3,5 @@
 rebel.xml
 target
 .iml
+*.ipr
+*.iws
