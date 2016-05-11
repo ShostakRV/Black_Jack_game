@@ -82,7 +82,7 @@ public class GameServiceImpl implements GameService {
         amountService.withdrawForNewGame(game);
 
         int sumOfUserCards = userCard1.getCardName().getValue() + userCard2.getCardName().getValue();
-        if (sumOfUserCards == 21) { // todo make test case
+        if (sumOfUserCards == 21) {
             return finishGame(game, false);
         }
 

@@ -1,11 +1,6 @@
 package com.my.applicatiom.black.jack.test.init;
 
-
-import com.my.application.black.jack.model.Card;
-import com.my.application.black.jack.model.Game;
 import com.my.application.black.jack.model.User;
-import com.my.application.black.jack.model.cards.GameCard;
-import com.my.application.black.jack.model.cards.UserCard;
 import com.my.application.black.jack.server.service.GameService;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
